@@ -1,6 +1,6 @@
 # Tiny Tunes 🎵
 
-A calm music-learning web app (installable PWA) for a young autistic child. First lesson: **Sa Re Ga Ma Pa**. Only the next key is enabled and glowing; tapping it plays the note and unlocks the following one, so a wrong tap is impossible.
+A calm music-learning web app (installable PWA) for a young autistic child. Lessons: **Stage 1** Sa Re Ga Ma Pa, **Stage 2** adds Dha Ni, **Stage 3** the full scale up to the upper Sa (changed in Grown-ups). Only the next key is enabled and glowing; tapping it plays the note and unlocks the following one, so a wrong tap is impossible.
 
 - No ads, accounts, network calls or tracking. Settings and progress are stored only in the device's `localStorage`.
 - A real piano-key layout: tapping a key **sings** its syllable (Sa, Re, Ga, Ma, Pa) with a natural neural singing voice (see `voices/README.md`), and the big syllable appears on screen.
