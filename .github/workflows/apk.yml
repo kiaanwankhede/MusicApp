@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: 17 }
       - name: Prepare web assets
-        run: mkdir www && cp index.html manifest.webmanifest icon.svg sw.js www/
+        run: mkdir www && cp index.html manifest.webmanifest icon.svg sw.js www/ && (cp -r voices www/ 2>/dev/null || true)
       - name: Create Android project (Capacitor)
         run: |
           npm init -y

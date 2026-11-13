@@ -105,15 +105,17 @@ function sing(c,dest,t,f,name,vol){
  src.start(t);lfo.start(t);src.stop(t+dur+.1);lfo.stop(t+dur+.1);
 }
 /* ---------- parent recordings (IndexedDB) ---------- */
-var ctx,recBuf={};
+var ctx,recBuf={},fileBuf={};
 function A(){ctx=ctx||new(window.AudioContext||window.webkitAudioContext)();if(ctx.state=="suspended")ctx.resume();return ctx}
 function idb(cb){try{var r=indexedDB.open("tt",1);r.onupgradeneeded=function(){r.result.createObjectStore("rec")};r.onsuccess=function(){cb(r.result)};r.onerror=function(){cb(null)}}catch(e){cb(null)}}
 function loadRecs(){idb(function(db){if(!db)return;var q=db.transaction("rec").objectStore("rec").openCursor();q.onsuccess=function(){var cur=q.result;if(!cur)return;
  var k=cur.key;cur.value.arrayBuffer().then(function(ab){return A().decodeAudioData(ab)}).then(function(b){recBuf[k]=b;drawRecs()}).catch(function(){});cur.continue()}})}
 function putRec(name,blob,cb){idb(function(db){if(!db)return cb&&cb();var tx=db.transaction("rec","readwrite");tx.objectStore("rec").put(blob,name);tx.oncomplete=function(){cb&&cb()}})}
 function delRec(name){delete recBuf[name];idb(function(db){if(db)db.transaction("rec","readwrite").objectStore("rec").delete(name)});drawRecs()}
-function playNote(i){var c=A(),n=N[i],t=c.currentTime+.02,v=D.vol/100;
- if(recBuf[n[0]]){var s=c.createBufferSource(),g=c.createGain();s.buffer=recBuf[n[0]];g.gain.value=v;s.connect(g);g.connect(c.destination);s.start(t)}
+function loadFiles(){N.forEach(function(n){var ex=["mp3","m4a","wav","ogg","webm"];(function tryNext(k){if(k>=ex.length)return;
+ fetch("voices/"+n[0].toLowerCase()+"."+ex[k]).then(function(r){if(!r.ok)throw 0;return r.arrayBuffer()}).then(function(ab){return A().decodeAudioData(ab)}).then(function(b){fileBuf[n[0]]=b;drawRecs()}).catch(function(){tryNext(k+1)})})(0)})}
+function playNote(i){var c=A(),n=N[i],t=c.currentTime+.02,v=D.vol/100,rb=recBuf[n[0]]||fileBuf[n[0]];
+ if(rb){var s=c.createBufferSource(),g=c.createGain();s.buffer=rb;g.gain.value=v;s.connect(g);g.connect(c.destination);s.start(t)}
  else sing(c,c.destination,t,n[1],n[0],v*.9)}
 var recording=null;
 function record(i,btn){var name=N[i][0];if(recording)return;
@@ -124,7 +126,7 @@ function record(i,btn){var name=N[i][0];if(recording)return;
    blob.arrayBuffer().then(function(ab){return A().decodeAudioData(ab)}).then(function(b){recBuf[name]=b;putRec(name,blob,function(){recording=null;drawRecs()})}).catch(function(){recording=null;drawRecs();alert("Couldn't use that recording, try again.")})};
   mr.start();setTimeout(function(){if(mr.state!="inactive")mr.stop()},2500)}).catch(function(){alert("Microphone permission is needed to record.")})}
 function drawRecs(){var box=$("recs");box.innerHTML="";N.forEach(function(n,i){var d=document.createElement("div");d.className="tog rec";
- var has=!!recBuf[n[0]];d.innerHTML="<b>"+n[0]+"</b><span class='mut'>"+(has?"your voice ✓":"built-in")+"</span><span class='row'></span>";var r=d.lastChild;
+ var has=!!recBuf[n[0]];d.innerHTML="<b>"+n[0]+"</b><span class='mut'>"+(has?"your voice ✓":fileBuf[n[0]]?"bundled voice ✓":"built-in")+"</span><span class='row'></span>";var r=d.lastChild;
  function mk(t,cls,fn){var b=document.createElement("button");b.className="btn sm "+cls;b.textContent=t;b.onclick=function(){fn(b)};r.appendChild(b)}
  mk("▶","alt",function(){playNote(i)});mk("● Rec","red",function(b){record(i,b)});if(has)mk("🗑","grey",function(){delRec(n[0])});box.appendChild(d)})}
 
@@ -155,7 +157,7 @@ function hs(){bar.style.transition="width 1.5s linear";bar.style.width="100%";ht
 function he(){clearTimeout(ht);bar.style.transition="none";bar.style.width="0"}
 $("hold").addEventListener("pointerdown",hs);
 ["pointerup","pointerleave","pointercancel"].forEach(function(e){$("hold").addEventListener(e,he)});
-apply();loadRecs();
+apply();loadRecs();loadFiles();
 window.TT={sing:sing,N:N};
 if("serviceWorker"in navigator&&location.protocol.indexOf("http")==0)navigator.serviceWorker.register("sw.js").catch(function(){});
 })();
