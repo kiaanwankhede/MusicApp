@@ -9,7 +9,10 @@ A calm music-learning web app (installable PWA) for a young autistic child. Firs
 ## Run locally
 `python3 -m http.server 8000` and open http://localhost:8000 (service worker needs http, not file://).
 
-## Deploy
+## Android APK
+Every push to `main` builds an APK automatically (GitHub Actions) and attaches it to a new Release: open the repo → **Releases** → download `TinyTunes.apk` on your phone and install (allow "install unknown apps" once).
+
+## Web hosting (optional)
 Settings → Pages → deploy from branch `main`, folder `/ (root)`.
 
 ## Docs
