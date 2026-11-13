@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tiny Tunes Together — Music app concept for a 4-year-old autistic child</title>
+<style>
+:root{--bg:#f7f5f0;--ink:#2b2f3a;--mut:#667;--card:#fff;--c1:#7fb7d9;--c2:#f3c969;--c3:#9bd1a6;--c4:#e9a6a6;--c5:#b9a7e0}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+main{max-width:1100px;margin:auto;padding:32px 20px 80px}
+h1{font-size:2rem;margin:0 0 4px}h2{margin:48px 0 12px;font-size:1.4rem;border-bottom:2px solid #e3dfd5;padding-bottom:6px}h3{margin:0 0 6px}
+.sub{color:var(--mut)}table{width:100%;border-collapse:collapse;background:var(--card);border-radius:10px;overflow:hidden;font-size:.92rem}
+th,td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid #eee}th{background:#ece8dd}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.card{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 1px 3px #0001}
+.note{background:#fff7dd;border-left:4px solid var(--c2);padding:10px 14px;border-radius:6px;font-size:.92rem}
+.phones{display:flex;flex-wrap:wrap;gap:28px;justify-content:center}
+figure{margin:0;text-align:center;width:250px}figcaption{font-size:.85rem;color:var(--mut);margin-top:8px}
+.ph{width:250px;height:520px;border:8px solid #2b2f3a;border-radius:34px;background:#fff;overflow:hidden;display:flex;flex-direction:column;position:relative}
+.bar{height:22px;background:#0000;font-size:10px;text-align:center;color:#889;padding-top:4px}
+.scr{flex:1;padding:12px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.big{width:100%;border-radius:22px;border:0;padding:0;display:flex;align-items:center;justify-content:center;font-size:42px;color:#fff}
+.lbl{font-size:13px;font-weight:600;text-align:center}
+.pill{border-radius:99px;padding:8px 14px;font-size:12px;background:#eef;display:inline-block}
+.keys{display:flex;gap:6px;width:100%;flex:1}.keys div{flex:1;border-radius:14px 14px 20px 20px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px;font-size:11px;color:#fff;font-weight:700}
+.row{display:flex;gap:8px;width:100%}.row>*{flex:1}
+.tog{display:flex;justify-content:space-between;width:100%;font-size:12px;padding:8px 10px;background:#f3f1ea;border-radius:10px}
+.sw{width:30px;height:16px;border-radius:9px;background:var(--c3);position:relative}.sw::after{content:"";position:absolute;right:2px;top:2px;width:12px;height:12px;border-radius:50%;background:#fff}
+.sw.off{background:#ccc}.sw.off::after{right:auto;left:2px}
+.dots{display:flex;gap:6px}.dots i{width:12px;height:12px;border-radius:50%;background:#ddd}.dots i.on{background:var(--c3)}
+.pg{height:10px;border-radius:5px;background:#eee;width:100%;overflow:hidden}.pg b{display:block;height:100%;background:var(--c3)}
+small{color:var(--mut)}
+.keys div.k{cursor:pointer;transition:.2s;font-size:15px;flex-direction:column;justify-content:flex-end}
+.keys div.k.lock{opacity:.25;filter:grayscale(.6);pointer-events:none}
+.keys div.k.next{animation:gl 1.6s ease-in-out infinite;transform:translateY(-4px)}
+.keys div.k.done{opacity:.85}.keys div.k.hit{transform:scale(.94)}
+@keyframes gl{0%,100%{box-shadow:0 0 0 0 #f3c96988}50%{box-shadow:0 0 0 10px #f3c96933}}
+@media (prefers-reduced-motion:reduce){.keys div.k.next{animation:none;outline:4px solid #f3c969}}
+</style></head><body><main>
+
+<h1>🎵 Tiny Tunes Together</h1>
+<div class="sub">Market research, design principles and mock screens for a music-learning app for a 4-year-old autistic child (working name). Prepared 31 Oct 2026.</div>
+
+<h2>1. Market research: what exists?</h2>
+<div class="note"><b>Honest caveat:</b> this is from a quick web search, not a full app-store audit. Pricing, features and availability change often — verify each app in the App Store / Google Play before relying on it. I could not retrieve details for mainstream learn-an-instrument apps (Simply Piano, Yousician, Tonara etc.); they are described below only as a general category and are mostly designed for older, neurotypical learners.</div>
+<p></p>
+<table>
+<tr><th>Category</th><th>Examples found</th><th>How they teach</th><th>Gaps for a 4-year-old with autism</th></tr>
+<tr><td>Research / non-profit autism music apps</td>
+<td><a href="https://link.springer.com/doi/10.1007/978-3-030-30033-3_22">Xylotism</a>, Suoniamo (CNR Italy), a virtual-piano web app for students with ASD; <a href="https://www.overons.kpn/nieuws/en/music-app-for-autistic-children">TEAM Papageno</a> (Papageno Foundation + KPN)</td>
+<td>Visually structured, step-by-step note play; game-like xylophone/piano; connecting children via music; supplements in-person music therapy</td>
+<td>Mostly prototypes or study tools, limited polish and reach; one 2019 paper noted there were essentially no apps for teaching music to people with autism. Rarely aimed at pre-schoolers; little parent coaching.</td></tr>
+<tr><td>Therapy / speech-through-music apps</td>
+<td><a href="https://appgoblin.info/apps/442977702">VAST: Autism &amp; Apraxia</a>, <a href="https://www.freepressjournal.in/amp/mumbai/mumbai-teen-develops-music-app-theratunes-to-help-children-with-mental-abilities">Theratunes</a>, <a href="https://www.idsa.org/?p=10636">Synchrony</a></td>
+<td>Songs + video modelling with adjustable tempo (VAST); original calming compositions (Theratunes); parent–child improvised music play (Synchrony)</td>
+<td>Focus is speech or relaxation, not building musical skill; passive listening; not a progressive curriculum.</td></tr>
+<tr><td>Open-ended kids' music toys</td>
+<td><a href="https://geekdad.com/2014/04/toca-band-autism/">Toca Band</a> (recommended for ages 2–9, promoted for Autism Awareness Day), Sago Mini Music Box (<a href="https://bridgingapps.org/?p=30003">BridgingApps listing</a>)</td>
+<td>Cause-and-effect: tap a character → sound. Free exploration, no instructions</td>
+<td>Fun and accessible but no learning path, no progress tracking, can be visually busy; no sensory controls.</td></tr>
+<tr><td>Music-making apps for special needs</td>
+<td>SoundPrism (<a href="https://www.each.org.uk/family-zone/activities-for-families/apps">EACH list</a>)</td>
+<td>Grid/tonal-layout instrument where any touch sounds musical</td>
+<td>Aimed at older kids; abstract UI.</td></tr>
+<tr><td>Mainstream learn-an-instrument apps</td>
+<td>Simply Piano, Yousician, etc. (not verified in this search)</td>
+<td>Follow-the-notes, listen-and-play with scoring, streaks</td>
+<td>Assume reading, instruction-following and tolerance for failure feedback and sound — typically unsuitable at age 4.</td></tr>
+</table>
+
+<h2>2. What the evidence says</h2>
+<div class="grid">
+<div class="card"><h3>Promising, not conclusive</h3>Reviews find music-based intervention may help social, communication and behavioural skills in young autistic children, but evidence is mostly small, low-to-moderate quality (<a href="https://research-repository.griffith.edu.au/server/api/core/bitstreams/38af8370-1ed2-5e1d-b4c2-a7cdbccb97d4/content">Griffith review</a>, <a href="https://link.springer.com/article/10.1007/s12144-025-07449-z">Springer 2025</a>).</div>
+<div class="card"><h3>Sensory care matters</h3>A qualitative study of music groups found play that respects sensory sensitivities, promotes calm and gives structured interaction was associated with more interactive behaviour (small, descriptive).</div>
+<div class="card"><h3>Therapist-led works best</h3>Most evidence is for music <i>therapy</i> with a therapist. An app should complement, not replace, a certified music therapist and the child's therapy team. Don't make clinical claims.</div>
+</div>
+
+<h2>3. The opportunity</h2>
+<p>No clear product combines (a) a <b>progressive, skill-building</b> path, (b) <b>sensory-safe</b> design, (c) <b>zero-failure</b> interaction suited to age 4, and (d) a <b>parent co-play</b> mode with coaching. That is the niche.</p>
+
+<h2>4. Design principles</h2>
+<div class="grid">
+<div class="card"><h3>1 · Sensory-first</h3>Volume cap, soft instrument timbres, no sudden loud sounds, muted colours, optional reduced motion, per-sound on/off.</div>
+<div class="card"><h3>2 · Errorless learning</h3>No wrong notes, no buzzers, no scores. Only the next key is enabled, so a wrong tap is impossible. Prompts fade gradually (full guide → partial → none).</div>
+<div class="card"><h3>3 · Predictable</h3>Same layout and routine each session: Hello song → Play → Choose → Goodbye song. Visual schedule + "all done" always visible.</div>
+<div class="card"><h3>4 · Follow the child's interest</h3>Child picks instrument/theme (trains, animals…). Supports repetition and stimming-friendly loops without discouraging them.</div>
+<div class="card"><h3>5 · Short, flexible sessions</h3>3–8 minute sessions with a gentle visual timer. Ends on success, never mid-frustration.</div>
+<div class="card"><h3>6 · Parent in the loop</h3>Co-play mode (turn-taking, call-and-response), simple coaching tips, a private progress view, exportable for therapists. Child-safe: no ads, no purchases, no chat, locked parent area.</div>
+</div>
+
+<h2>5. Learning path (age ~4)</h2>
+<table>
+<tr><th>Level</th><th>Skill</th><th>Activity</th></tr>
+<tr><td>1 · Explore</td><td>Cause &amp; effect, tolerance of sound</td><td>Tap big shapes → soft sounds, visuals ripple</td></tr>
+<tr><td>2 · Beat</td><td>Steady pulse, imitation</td><td>Drum along with a gentle pulsing animal; copy a parent's pattern</td></tr>
+<tr><td>3 · Loud/Quiet &amp; Fast/Slow</td><td>Dynamics &amp; tempo concepts</td><td>Big/small drum, turtle/rabbit</td></tr>
+<tr><td>4 · Sa Re Ga Ma Pa</td><td>Sequencing, note names, pitch going up</td><td>Keys unlock one by one: tap Sa → Re is enabled → Ga … Pa. Later: Pa down to Sa, then Dha Ni Sa, then pitch contrast (high bird / low bear).</td></tr>
+<tr><td>5 · Turn-taking</td><td>Social reciprocity</td><td>Call-and-response with parent or on-screen friend</td></tr>
+<tr><td>6 · First tunes</td><td>3-note melodies, colour-coded</td><td>Lights guide keys, fading to no guide</td></tr>
+</table>
+
+<h2>6. Mock screens</h2>
+<div class="phones">
+
+<figure><div class="ph"><div class="bar">9:41</div><div class="scr">
+<div style="font-size:60px;margin-top:30px">🐻</div>
+<div class="lbl" style="font-size:18px">Hello, Aarav!</div>
+<small>Let's make music</small>
+<button class="big" style="background:var(--c3);height:110px;margin-top:14px;font-size:30px">▶ Play</button>
+<div class="row"><div class="pill">🟦 Today</div><div class="pill">🔊 Soft</div></div>
+<div class="lbl" style="margin-top:auto">🔒 Grown-ups (hold)</div>
+</div></div><figcaption><b>1 · Home</b> — one giant button; fixed layout; parent area behind a long-press</figcaption></figure>
+
+<figure><div class="ph"><div class="bar">9:41</div><div class="scr">
+<div class="lbl">First → Then</div>
+<div class="row"><div class="pill" style="background:#dff3e3;text-align:center">1 👋<br>Hello</div><div class="pill" style="background:#fdf0c9;text-align:center">2 🥁<br>Drum</div><div class="pill" style="background:#f6dada;text-align:center">3 🎹<br>Keys</div></div>
+<div class="row"><div class="pill" style="background:#e2dcf4;text-align:center">4 👋<br>Bye</div></div>
+<div class="pg"><b style="width:25%"></b></div>
+<div class="lbl">Timer: 5 min ⏳</div>
+<button class="big" style="background:var(--c1);height:90px;font-size:26px;margin-top:auto">Go ▶</button>
+</div></div><figcaption><b>2 · Visual routine</b> — predictable session schedule with a gentle progress bar</figcaption></figure>
+
+<figure><div class="ph"><div class="bar">9:41</div><div class="scr">
+<div class="lbl">Tap the drum 🥁</div>
+<button class="big" style="background:var(--c4);flex:1;font-size:70px">🥁</button>
+<div class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+<small>Soft glow on every tap — never wrong</small>
+<div class="row"><div class="pill">🔈 −</div><div class="pill">🏠</div><div class="pill">✔ All done</div></div>
+</div></div><figcaption><b>3 · Explore / Beat</b> — one huge target, immediate gentle feedback, "All done" always available</figcaption></figure>
+
+<figure><div class="ph"><div class="bar">9:41</div><div class="scr">
+<div class="lbl" id="sgTitle">Tap the glowing key ✨</div>
+<div class="keys" id="sgKeys"></div>
+<div class="dots" id="sgDots"></div>
+<small id="sgMsg">Sa → Re → Ga → Ma → Pa (try it! sound on)</small>
+<div class="row"><div class="pill" id="sgReset" style="cursor:pointer;text-align:center">↺ Again</div><div class="pill" style="text-align:center">🏠</div></div>
+</div></div><figcaption><b>4 · Sa Re Ga Ma Pa (playable!)</b> — only the next key is enabled and glowing; tapping it plays the note, then unlocks the next. No wrong notes possible.</figcaption></figure>
+
+<figure><div class="ph"><div class="bar">9:41</div><div class="scr">
+<div class="lbl">My turn… then your turn!</div>
+<div style="font-size:50px">👩 → 🧒</div>
+<div class="row"><div style="background:var(--c3);height:70px;border-radius:16px"></div><div style="background:var(--c2);height:70px;border-radius:16px"></div><div style="background:var(--c4);height:70px;border-radius:16px"></div></div>
+<div class="pill" style="background:#dff3e3">Parent plays ▶</div>
+<div class="pill" style="background:#fdf0c9">Child's turn…</div>
+<small>Waits as long as needed — no timeout, no penalty</small>
+</div></div><figcaption><b>5 · Co-play</b> — call-and-response turn-taking with a parent (or on-screen friend)</figcaption></figure>
+
+<figure><div class="ph"><div class="bar">9:41</div><div class="scr">
+<div style="font-size:70px;margin-top:20px">🌟</div>
+<div class="lbl" style="font-size:18px">Great playing!</div>
+<small>Soft chime · 2 seconds · then calm</small>
+<button class="big" style="background:var(--c5);height:80px;font-size:24px;margin-top:20px">One more? 🎵</button>
+<button class="big" style="background:#bbb;height:60px;font-size:20px">All done 👋</button>
+</div></div><figcaption><b>6 · Celebration</b> — brief, quiet reward; a choice to continue or stop, both respected</figcaption></figure>
+
+<figure><div class="ph"><div class="bar">9:41</div><div class="scr" style="align-items:stretch">
+<div class="lbl">🔒 Grown-ups</div>
+<div class="tog">Max volume <b>60%</b></div>
+<div class="tog">Reduced motion <span class="sw"></span></div>
+<div class="tog">Bright colours <span class="sw off"></span></div>
+<div class="tog">Session length <b>5 min</b></div>
+<div class="tog">Sounds: piano · drum · bells <span class="sw"></span></div>
+<div class="tog">Harsh sounds (cymbal) <span class="sw off"></span></div>
+<small style="text-align:center">Sensory profile — tune it to your child</small>
+</div></div><figcaption><b>7 · Sensory settings</b> — parent-controlled volume, motion, colour and sound palette</figcaption></figure>
+
+<figure><div class="ph"><div class="bar">9:41</div><div class="scr" style="align-items:stretch">
+<div class="lbl">📈 Progress (this week)</div>
+<div>Level 2 · Beat <div class="pg"><b style="width:60%"></b></div></div>
+<div class="tog">Sessions <b>5</b></div>
+<div class="tog">Avg. time <b>4 min</b></div>
+<div class="tog">Imitated a pattern <b>3×</b></div>
+<div class="card" style="font-size:12px;padding:10px">💡 <b>Tip:</b> Try copying his rhythm first, then add one beat. Pause and wait — he may take a while.</div>
+<div class="pill" style="text-align:center">Share summary with therapist</div>
+</div></div><figcaption><b>8 · Parent progress</b> — observations and coaching tips, not scores or diagnoses</figcaption></figure>
+
+</div>
+
+<h2>7. MVP scope &amp; next steps</h2>
+<div class="grid">
+<div class="card"><h3>MVP (iPad first)</h3>Home, visual routine, drum, colour keys, sensory settings, simple progress. Offline, no accounts, no ads. iPad is a good first target (large screen, common in autism families).</div>
+<div class="card"><h3>Build</h3>SwiftUI or Flutter; pre-recorded soft samples (low latency); local storage only; COPPA / GDPR-K aligned privacy.</div>
+<div class="card"><h3>Validate</h3>Start with your son (short, relaxed sessions, note what he enjoys). Then talk to a board-certified music therapist and OT/SLP for feedback; try 3–5 other families before wider release.</div>
+</div>
+<p class="sub">This is a design concept, not medical advice. It is not a substitute for therapy; consult your child's care team.</p>
+<script>
+(function(){
+var N=[["Sa",261.63,"#7fb7d9"],["Re",293.66,"#9bd1a6"],["Ga",329.63,"#f3c969"],["Ma",349.23,"#e9a6a6"],["Pa",392.0,"#b9a7e0"]];
+var keys=document.getElementById('sgKeys'),dots=document.getElementById('sgDots'),msg=document.getElementById('sgMsg'),title=document.getElementById('sgTitle');
+var ctx,step=0;
+function tone(f){try{ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();var o=ctx.createOscillator(),g=ctx.createGain(),t=ctx.currentTime;
+o.type='triangle';o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.25,t+.03);g.gain.exponentialRampToValueAtTime(.001,t+1.1);
+o.connect(g);g.connect(ctx.destination);o.start(t);o.stop(t+1.2);}catch(e){}}
+function render(){keys.innerHTML='';dots.innerHTML='';
+N.forEach(function(n,i){var d=document.createElement('div');d.className='k '+(i<step?'done':i==step?'next':'lock');d.style.background=n[2];
+d.innerHTML='<span style="font-size:20px;margin-bottom:6px">'+(i==step?'👆':i<step?'✓':'')+'</span>'+n[0];
+d.onclick=function(){if(i!=step)return;tone(n[1]);d.classList.add('hit');step++;
+if(step==N.length){title.textContent='🌟 Sa Re Ga Ma Pa!';msg.textContent='You played all five! Tap Again to repeat.';}
+else msg.textContent=n[0]+'! Now tap the glowing key.';
+setTimeout(render,180);};
+keys.appendChild(d);var p=document.createElement('i');if(i<step)p.className='on';dots.appendChild(p);});
+if(step<N.length)title.textContent='Tap the glowing key ✨';}
+document.getElementById('sgReset').onclick=function(){step=0;msg.textContent='Sa → Re → Ga → Ma → Pa';render();};
+render();})();
+</script>
+</main></body></html>

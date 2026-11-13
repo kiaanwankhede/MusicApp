@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#7fb7d9"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg">
+<title>Tiny Tunes</title>
+<style>
+:root{--bg:#f7f5f0;--ink:#2b2f3a;--mut:#667;--card:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#232733;--ink:#eee;--mut:#aab;--card:#2e3342}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
+html,body{height:100%;margin:0}
+body{font:18px/1.4 system-ui,sans-serif;background:var(--bg);color:var(--ink);overflow:hidden;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+.screen{display:none;height:100%;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:20px;text-align:center}
+.screen.on{display:flex}
+h1,h2{margin:0}.mut{color:var(--mut);font-size:15px}
+.btn{border:0;border-radius:28px;padding:22px 48px;font-size:28px;font-weight:700;color:#fff;background:#9bd1a6;cursor:pointer;min-width:220px}
+.btn.alt{background:#b9a7e0}.btn.grey{background:#aaa}.btn.sm{font-size:16px;padding:12px 24px;min-width:0;border-radius:18px}
+#keys{display:flex;gap:12px;width:100%;max-width:760px;flex:1;max-height:60vh}
+.k{flex:1;border:0;border-radius:22px 22px 34px 34px;color:#fff;font-size:clamp(20px,5vw,34px);font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:16px;cursor:pointer;transition:opacity .25s,transform .15s}
+.k.lock{opacity:.22;filter:grayscale(.6);pointer-events:none}
+.k.next{animation:gl 1.8s ease-in-out infinite;transform:translateY(-8px)}
+.k.hit{transform:scale(.94)}.k .em{font-size:1.2em;margin-bottom:8px;min-height:1.4em}
+@keyframes gl{0%,100%{box-shadow:0 0 0 0 #f3c96999}50%{box-shadow:0 0 0 16px #f3c96933}}
+body.calm .k.next{animation:none;outline:5px solid #f3c969}body.calm *{transition:none!important}
+#dots{display:flex;gap:10px}#dots i{width:18px;height:18px;border-radius:50%;background:#ccc}#dots i.on{background:#9bd1a6}
+.row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.tog{display:flex;justify-content:space-between;align-items:center;gap:16px;width:100%;max-width:420px;background:var(--card);padding:14px 18px;border-radius:14px;font-size:17px}
+input[type=range]{width:160px}input[type=checkbox]{width:26px;height:26px}
+.hold{font-size:14px;color:var(--mut);padding:10px;border:2px dashed #bbb;border-radius:14px;position:relative;overflow:hidden}
+.hold b{position:absolute;left:0;top:0;bottom:0;width:0;background:#9bd1a655}
+.star{font-size:90px}
+</style></head><body>
+
+<section class="screen on" id="home">
+  <div style="font-size:90px">🐻</div>
+  <h1>Hello! Let's make music</h1>
+  <button class="btn" id="goPlay">▶ Play</button>
+  <div class="mut" id="streak"></div>
+  <div class="hold" id="hold"><b></b>🔒 Grown-ups: hold 1.5s</div>
+</section>
+
+<section class="screen" id="play">
+  <h2 id="title">Tap the glowing key ✨</h2>
+  <div id="keys"></div>
+  <div id="dots"></div>
+  <div class="mut" id="msg"></div>
+  <div class="row"><button class="btn sm grey" id="again">↺ Again</button><button class="btn sm grey" id="done">✔ All done</button></div>
+</section>
+
+<section class="screen" id="win">
+  <div class="star">🌟</div><h1>Sa Re Ga Ma Pa!</h1><div class="mut">Great playing!</div>
+  <button class="btn alt" id="more">One more? 🎵</button>
+  <button class="btn grey" id="stop">All done 👋</button>
+</section>
+
+<section class="screen" id="parent">
+  <h2>🔒 Grown-ups</h2>
+  <label class="tog">Volume <input type="range" id="vol" min="10" max="100"></label>
+  <label class="tog">Reduced motion / calm <input type="checkbox" id="calm"></label>
+  <label class="tog">Say note name aloud <input type="checkbox" id="speak"></label>
+  <label class="tog">Show note names <input type="checkbox" id="names"></label>
+  <div class="tog"><span>Sessions: <b id="s1">0</b> · Completed runs: <b id="s2">0</b></span><button class="btn sm grey" id="reset">Reset</button></div>
+  <button class="btn sm" id="back">← Back</button>
+</section>
+
+<script>
+(function(){
+var N=[["Sa",261.63,"#7fb7d9"],["Re",293.66,"#9bd1a6"],["Ga",329.63,"#f3c969"],["Ma",349.23,"#e9a6a6"],["Pa",392.0,"#b9a7e0"]];
+var $=function(i){return document.getElementById(i)};
+var D={vol:60,calm:false,speak:false,names:true,sessions:0,runs:0,last:""};
+try{Object.assign(D,JSON.parse(localStorage.getItem("tt")||"{}"))}catch(e){}
+function save(){try{localStorage.setItem("tt",JSON.stringify(D))}catch(e){}}
+function show(id){document.querySelectorAll(".screen").forEach(function(s){s.classList.toggle("on",s.id==id)})}
+var ctx,step=0;
+function tone(f){try{ctx=ctx||new(window.AudioContext||window.webkitAudioContext)();if(ctx.state=="suspended")ctx.resume();
+var o=ctx.createOscillator(),g=ctx.createGain(),t=ctx.currentTime,v=D.vol/100*.35;
+o.type="triangle";o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.04);g.gain.exponentialRampToValueAtTime(.001,t+1.2);
+o.connect(g);g.connect(ctx.destination);o.start(t);o.stop(t+1.3)}catch(e){}}
+function say(w){if(!D.speak||!window.speechSynthesis)return;try{var u=new SpeechSynthesisUtterance(w);u.rate=.7;u.volume=D.vol/100;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+function apply(){document.body.classList.toggle("calm",D.calm);$("vol").value=D.vol;$("calm").checked=D.calm;$("speak").checked=D.speak;$("names").checked=D.names;
+$("s1").textContent=D.sessions;$("s2").textContent=D.runs;$("streak").textContent=D.runs?"Runs completed: "+D.runs+" ⭐":""}
+function render(){var k=$("keys"),d=$("dots");k.innerHTML="";d.innerHTML="";
+N.forEach(function(n,i){var b=document.createElement("button");b.className="k "+(i<step?"":i==step?"next":"lock");b.style.background=n[2];
+b.innerHTML='<span class="em">'+(i==step?"👆":i<step?"✓":"")+"</span>"+(D.names?n[0]:"");
+b.onclick=function(){if(i!=step)return;tone(n[1]);say(n[0]);b.classList.add("hit");step++;
+if(step==N.length){D.runs++;save();apply();$("title").textContent="🌟 "+N.map(function(x){return x[0]}).join(" ");$("msg").textContent="";setTimeout(function(){show("win")},1300)}
+else $("msg").textContent="";setTimeout(render,200)};
+k.appendChild(b);var p=document.createElement("i");if(i<step)p.className="on";d.appendChild(p)});
+if(step<N.length)$("title").textContent="Tap the glowing key ✨"}
+function start(){step=0;render();show("play")}
+$("goPlay").onclick=function(){D.sessions++;save();apply();start()};
+$("again").onclick=start;$("more").onclick=start;
+$("done").onclick=$("stop").onclick=function(){show("home")};
+$("back").onclick=function(){show("home")};
+$("vol").oninput=function(){D.vol=+this.value;save();tone(261.63)};
+["calm","speak","names"].forEach(function(id){$(id).onchange=function(){D[id]=this.checked;save();apply()}});
+$("reset").onclick=function(){D.sessions=0;D.runs=0;save();apply()};
+var ht,bar=$("hold").firstChild;
+function hs(){bar.style.transition="width 1.5s linear";bar.style.width="100%";ht=setTimeout(function(){bar.style.width="0";show("parent")},1500)}
+function he(){clearTimeout(ht);bar.style.transition="none";bar.style.width="0"}
+["pointerdown"].forEach(function(e){$("hold").addEventListener(e,hs)});
+["pointerup","pointerleave","pointercancel"].forEach(function(e){$("hold").addEventListener(e,he)});
+apply();
+if("serviceWorker"in navigator&&location.protocol.indexOf("http")==0)navigator.serviceWorker.register("sw.js").catch(function(){});
+})();
+</script></body></html>
