@@ -17,6 +17,8 @@ Every push to `main` builds an APK automatically (GitHub Actions) and attaches i
 Settings → Pages → deploy from branch `main`, folder `/ (root)`.
 
 ## Docs
+**[Design presentation with mock screens →](docs/presentation/README.md)** (new level-by-level plan: Riyaz ki Shuruaat)
+
 `docs/design.html` — market research, design principles and mock screens.
 
 Not a medical product or a replacement for therapy; consult your child's care team.
