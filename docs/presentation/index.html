@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Riyaz ki Shuruaat</title>
+<style>
+@font-face{font-family:"Baloo 2";font-weight:600;src:url(fonts/baloo-2-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF}
+@font-face{font-family:"Baloo 2";font-weight:700;src:url(fonts/baloo-2-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF}
+@font-face{font-family:"Baloo 2";font-weight:800;src:url(fonts/baloo-2-latin-800-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF}
+@font-face{font-family:"Baloo 2";font-weight:600;src:url(fonts/baloo-2-devanagari-600-normal.woff2) format("woff2");unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FF}
+@font-face{font-family:"Baloo 2";font-weight:700;src:url(fonts/baloo-2-devanagari-700-normal.woff2) format("woff2");unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FF}
+@font-face{font-family:"Baloo 2";font-weight:800;src:url(fonts/baloo-2-devanagari-800-normal.woff2) format("woff2");unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FF}
+@font-face{font-family:"Mukta";font-weight:400;src:url(fonts/mukta-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF}
+@font-face{font-family:"Mukta";font-weight:600;src:url(fonts/mukta-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF}
+@font-face{font-family:"Mukta";font-weight:700;src:url(fonts/mukta-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF}
+@font-face{font-family:"Mukta";font-weight:400;src:url(fonts/mukta-devanagari-400-normal.woff2) format("woff2");unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FF}
+@font-face{font-family:"Mukta";font-weight:600;src:url(fonts/mukta-devanagari-600-normal.woff2) format("woff2");unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FF}
+@font-face{font-family:"Mukta";font-weight:700;src:url(fonts/mukta-devanagari-700-normal.woff2) format("woff2");unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FF}
+
+:root{--bg:#FBF6EC;--ink:#23263A;--mut:#6B6F80;--line:#EADFCB;--saf:#E8913A;--ind:#3D4A8A;--leaf:#6E9F5A;--teal:#3E9490;--rose:#D0675F;--vio:#7F62B8}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#d9d4c8}
+body{font-family:"Mukta","Noto Color Emoji",sans-serif;color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.slide{width:1280px;height:720px;background:var(--bg);position:relative;overflow:hidden;padding:44px 56px 0;break-after:page}
+@media screen{.slide{margin:24px auto;box-shadow:0 6px 30px rgba(0,0,0,.18)}}
+@page{size:1280px 720px;margin:0}
+@media print{html,body{background:none}.slide{margin:0}}
+.foot{position:absolute;left:56px;right:56px;bottom:18px;display:flex;justify-content:space-between;font-size:12.5px;color:#A39C8C}
+.kicker{font-weight:700;letter-spacing:.14em;font-size:13px;color:var(--saf);text-transform:uppercase}
+h1{font-family:"Baloo 2";font-size:66px;line-height:1;font-weight:800;color:#2B2F45}
+h2{font-family:"Baloo 2";font-size:40px;font-weight:800;line-height:1.05;color:#2B2F45}
+.dev{font-family:"Baloo 2";color:var(--saf);font-weight:700}
+.lead{font-size:20px;color:#4A4E63;line-height:1.35}
+.pill{display:inline-block;font-weight:600;font-size:15px;padding:5px 14px;border-radius:20px;background:#fff;border:1.5px solid var(--line);margin:0 6px 8px 0}
+.note{font-size:14.5px;color:var(--mut);line-height:1.35}
+
+/* ---------- phone ---------- */
+.ph{display:flex;flex-direction:column;align-items:center;gap:9px}
+.phone{width:236px;height:496px;border-radius:36px;background:#1F2233;padding:8px;box-shadow:0 18px 40px rgba(35,38,58,.25);position:relative}
+.screen{width:100%;height:100%;border-radius:29px;background:#FFF9EF;overflow:hidden;display:flex;flex-direction:column;position:relative;font-family:"Baloo 2","Noto Color Emoji",sans-serif;color:#2B2F45}
+.notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:62px;height:15px;border-radius:9px;background:#1F2233}
+.sb{display:flex;justify-content:space-between;align-items:center;padding:30px 13px 2px;height:48px}
+.dots i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#E6DCC8;margin-right:4px}
+.dots i.done{background:#8DBB78}.dots i.cur{background:var(--saf);box-shadow:0 0 0 3px #E8913A33}
+.tp{font-family:Mukta;font-size:10.5px;font-weight:600;background:#F3EAD8;color:#7A5A2E;padding:1px 8px;border-radius:10px}
+.st{font-weight:700;font-size:19px;text-align:center;margin:2px 0 0;line-height:1.2}
+.st small{display:block;font-family:Mukta;font-weight:600;font-size:11px;color:#9A927F}
+.tbar{display:flex;gap:6px;justify-content:center;margin:6px 0 0}
+.tb{font-size:13px;font-weight:700;padding:3px 11px;border-radius:14px;background:#F1EBDD;color:#A39C8C}
+.tb.on{background:var(--ind);color:#fff}.tb.on.you{background:var(--saf)}
+.body{flex:1;position:relative;padding:4px 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.ft{display:flex;justify-content:space-between;padding:8px 14px 16px}
+.kb{font-size:14px;font-weight:700;padding:6px 14px;border-radius:16px;background:#EFE7D6;color:#5D5648}
+.kb.stop{background:#F6DCD6;color:#9A4A3E}
+.bub{display:flex;align-items:center;gap:7px;background:#fff;border-radius:16px;padding:5px 12px;box-shadow:0 2px 8px rgba(0,0,0,.07);font-size:15px;font-weight:700}
+.bub .av{font-size:22px}
+.lad{position:relative;width:206px}
+.rung{position:absolute;left:0;right:0;height:26px;display:flex;align-items:center;gap:6px}
+.nl{width:46px;text-align:right;font-weight:800;font-size:15px;color:var(--c);line-height:.95}
+.nl i{display:block;font-style:normal;font-size:11px;font-weight:700;opacity:.85}
+.bar{flex:1;height:9px;border-radius:6px;background:color-mix(in srgb,var(--c) 28%,#fff)}
+.rung.on .bar{height:14px;background:var(--c);box-shadow:0 0 0 4px color-mix(in srgb,var(--c) 22%,transparent),0 0 18px color-mix(in srgb,var(--c) 55%,transparent)}
+.rung.grey .nl{color:#CFC8B8}.rung.grey .bar{background:repeating-linear-gradient(90deg,#E2DACB 0 6px,transparent 6px 11px)}
+.trace{position:absolute;left:0;top:0;overflow:visible}
+.trace polyline{fill:none;stroke:#E8913A;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round;opacity:.5}
+.diya{position:absolute;font-size:24px;line-height:1;filter:drop-shadow(0 2px 2px rgba(0,0,0,.18))}
+.diya.glow{filter:drop-shadow(0 0 6px #F7C95C) drop-shadow(0 0 14px #F2C14E)}
+.arrow{position:absolute;right:-2px;font-size:22px;color:#B9B0A0;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;max-width:206px}
+.chip{font-weight:800;font-size:14.5px;padding:3px 9px;border-radius:12px;background:#F1EBDD;color:#B4AC9B}
+.chip.done{background:var(--c);color:#fff}
+.chip.cur{background:#fff;color:var(--c);box-shadow:0 0 0 2px var(--c),0 0 14px color-mix(in srgb,var(--c) 50%,transparent)}
+.lyr{font-family:Mukta;font-size:12.5px;color:#7D7667;text-align:center}
+.big{font-size:64px;line-height:1}
+.glowbig{filter:drop-shadow(0 0 10px #F7C95C) drop-shadow(0 0 24px #F2C14E)}
+.prog{font-family:Mukta;font-size:11.5px;color:#9A927F;font-weight:600}
+.taalrow{display:flex;gap:7px;padding:8px 9px;border-radius:16px;background:#F3EAD8;position:relative}
+.beat{width:38px;height:38px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#A39C8C;position:relative}
+.beat.cur{background:var(--ind);color:#fff;box-shadow:0 0 0 4px #3D4A8A30}
+.beat .ic{position:absolute;top:-21px;font-size:17px}
+.taalgap{height:10px}
+.rl{display:flex;align-items:center;gap:8px;background:#fff;border-radius:12px;padding:4px 10px;width:204px;font-size:14px;font-weight:700}
+.rl .e{font-size:17px;width:22px;text-align:center}
+.rl .m{margin-left:auto;font-family:Mukta;font-size:11px;color:#9A927F;font-weight:600}
+.rl.cur{box-shadow:0 0 0 2px var(--saf)}
+.go{background:var(--saf);color:#fff;font-weight:800;font-size:20px;border-radius:22px;padding:5px 38px;margin-top:4px}
+.wk{display:flex;gap:5px}.wk span{font-size:15px;filter:grayscale(1) opacity(.3)}.wk span.on{filter:none}
+.gl{display:flex;justify-content:space-between;align-items:center;width:206px;background:#fff;border-radius:11px;padding:5px 9px;font-family:Mukta;font-size:12.5px;font-weight:600;gap:6px}
+.gl .ok{color:#3F8A4A;font-weight:700}.gl .warn{color:#B7791F;font-weight:700;text-align:right;line-height:1.1}
+.gl .rec{background:#E07A73;color:#fff;border-radius:10px;padding:0 8px}
+.meter{width:206px;background:#fff;border-radius:11px;padding:6px 9px 8px;font-family:Mukta;font-size:11.5px;color:#7D7667;font-weight:600}
+.scale{position:relative;height:16px;margin-top:5px;border-radius:8px;background:linear-gradient(90deg,#F6DCD6,#FDF0DC 30%,#DDEFD6 42%,#DDEFD6 58%,#FDF0DC 70%,#F6DCD6)}
+.needle{position:absolute;top:-3px;width:4px;height:22px;border-radius:2px;background:#2B2F45}
+.recbtn{width:54px;height:54px;border-radius:50%;background:#E07A73;box-shadow:0 0 0 6px #E07A7333;margin:2px auto 0}
+.sl{width:206px;background:#fff;border-radius:11px;padding:6px 10px;font-family:Mukta;font-size:12.5px;font-weight:600;display:flex;justify-content:space-between;align-items:center}
+.sl .v{color:var(--ind);font-weight:700}
+.track{width:84px;height:6px;border-radius:3px;background:#EDE5D4;position:relative}
+.track b{position:absolute;left:0;top:0;bottom:0;border-radius:3px;background:var(--saf)}
+.track i{position:absolute;top:-4px;width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px var(--saf)}
+.log{width:206px;background:#EEF4E8;border-radius:11px;padding:6px 10px;font-family:Mukta;font-size:12px;color:#3F5F35;line-height:1.35}
+.log b{display:block;font-size:10.5px;letter-spacing:.08em;color:#5D7F52}
+.cap{width:250px;text-align:center;font-size:13.5px;color:var(--mut);line-height:1.25}
+.cap b{color:var(--ink)}
+
+/* ---------- level slides ---------- */
+.lvl{display:grid;grid-template-columns:600px 1fr;gap:30px;height:620px}
+.badge{display:inline-block;font-weight:700;font-size:13px;letter-spacing:.14em;color:#fff;background:var(--lc);border-radius:14px;padding:3px 13px;margin-bottom:10px}
+.lvl h2 .dev{color:var(--lc);font-size:32px;margin-left:8px}
+.goal{font-size:20px;color:#4A4E63;line-height:1.3;margin:8px 0 4px}
+.sec h4{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:#9A927F;margin:14px 0 4px;font-weight:700}
+ol.steps{list-style:none;counter-reset:s}
+ol.steps li{counter-increment:s;position:relative;padding-left:31px;margin:6px 0;font-size:16.5px;line-height:1.3}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;background:var(--lc);color:#fff;font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+ul.dots2{list-style:none}
+ul.dots2 li{position:relative;padding-left:18px;margin:4px 0;font-size:16px;line-height:1.3}
+ul.dots2 li::before{content:"";position:absolute;left:3px;top:9px;width:7px;height:7px;border-radius:50%;background:var(--lc)}
+.boxes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.box{border-radius:14px;padding:11px 14px;font-size:15px;line-height:1.3}
+.box b{display:block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
+.box.move{background:#E7F1E1}.box.move b{color:#3F7A3A}
+.box.tip{background:#FCEFDA}.box.tip b{color:#B26A1C}
+.phones{display:flex;gap:24px;justify-content:center;align-items:flex-start;padding-top:4px}
+.sg{font-family:"Baloo 2";font-weight:700;color:var(--lc)}
+
+/* ---------- misc slides ---------- */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.card{background:#fff;border-radius:18px;padding:16px 20px;border:1.5px solid var(--line);display:flex;gap:14px}
+.card .ce{font-size:34px;line-height:1}
+.card h3{font-family:"Baloo 2";font-size:21px;font-weight:800;line-height:1.15;margin-bottom:3px}
+.card p{font-size:15.5px;line-height:1.32;color:#4A4E63}
+.band{margin-top:18px;background:#2B2F45;color:#fff;border-radius:18px;padding:14px 22px;display:flex;align-items:center;gap:16px;font-size:16px}
+.band .f{background:#ffffff1a;border-radius:12px;padding:5px 12px;font-weight:600}
+.band .f b{font-family:"Baloo 2";color:#F2C14E;font-size:18px;margin-right:4px}
+.sched{display:flex;flex-direction:column;gap:9px;margin-top:20px;width:560px}
+.si{display:flex;align-items:center;gap:14px;background:#fff;border-radius:14px;border:1.5px solid var(--line);padding:8px 16px}
+.si .n{font-family:"Baloo 2";font-weight:800;color:#C9C0AE;font-size:20px;width:16px}
+.si .e{font-size:26px}
+.si .t{font-weight:700;font-size:17px;line-height:1.1}
+.si .t small{display:block;font-weight:400;font-size:13.5px;color:var(--mut)}
+.si .m{margin-left:auto;font-weight:700;color:var(--saf);font-size:15px;white-space:nowrap}
+.stairs{display:flex;gap:12px;align-items:flex-end;height:392px;margin-top:16px}
+.col{width:180px;display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+.col .lab{margin-bottom:8px}
+.col .lab .num{font-weight:700;font-size:12px;letter-spacing:.12em;color:var(--lc)}
+.col .lab .nm{font-family:"Baloo 2";font-weight:800;font-size:20px;line-height:1.05}
+.col .lab .dv{font-family:"Baloo 2";font-weight:700;font-size:14px;color:var(--lc)}
+.col .blk{background:var(--lc);border-radius:14px 14px 4px 4px;color:#fff;padding:10px 12px;font-size:14px;line-height:1.3}
+.col .blk .ex{font-family:"Baloo 2";font-weight:700;font-size:15px;margin-top:6px;background:#ffffff26;border-radius:8px;padding:3px 7px}
+.alongside{display:inline-block;font-size:11px;font-weight:700;background:#fff;color:var(--lc);border-radius:8px;padding:0 6px;margin-top:3px}
+.under{display:flex;gap:12px;margin-top:8px}
+.under div{width:180px;font-size:13px;line-height:1.25;color:var(--mut)}
+.under div b{display:block;font-size:10.5px;letter-spacing:.1em;color:#3F7A3A}
+table.rs{border-collapse:collapse;width:600px;font-size:15px;margin-top:16px}
+table.rs td{padding:6px 10px;border-bottom:1.5px solid var(--line);vertical-align:top}
+table.rs td:first-child{font-weight:700;white-space:nowrap}
+table.rs td:last-child{text-align:right;font-weight:700;color:var(--saf);white-space:nowrap}
+table.rs tr.tot td{border-bottom:0;font-size:16px}
+.next{background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:16px 20px;width:470px}
+.next ol{list-style:none;counter-reset:s}
+.next li{counter-increment:s;position:relative;padding-left:32px;margin:9px 0;font-size:16px;line-height:1.3}
+.next li::before{content:counter(s);position:absolute;left:0;top:0;width:23px;height:23px;border-radius:50%;background:var(--ind);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.callout{margin-top:14px;background:#FCEFDA;border-radius:16px;padding:12px 16px;font-size:15px;line-height:1.35;width:470px}
+.callout b{color:#B26A1C}
+.cmp{display:grid;grid-template-columns:110px 1fr 1fr;gap:6px 10px;margin-top:16px;font-size:15px;align-items:center}
+.cmp .ch{font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.cmp .ch.old{color:#A39C8C}.cmp .ch.new{color:#3F7A3A}
+.cmp .cl{font-weight:700;color:var(--mut);font-size:14px}
+.cmp .co{background:#F1ECE2;color:#8C8577;border-radius:10px;padding:6px 12px;text-decoration:line-through;text-decoration-color:#C9C0AE}
+.cmp .cn{background:#E7F1E1;color:#2F5A2A;border-radius:10px;padding:6px 12px;font-weight:600}
+</style></head><body>
+
+<!-- 1 · Title -->
+<section class="slide">
+  <div style="display:grid;grid-template-columns:640px 1fr;gap:20px;height:620px;align-items:center">
+    <div>
+      <div class="kicker">Tiny Tunes · new design</div>
+      <h1 style="margin-top:14px">Riyaz ki Shuruaat</h1>
+      <div class="dev" style="font-size:40px;margin-top:6px">रियाज़ की शुरुआत</div>
+      <p class="lead" style="margin:22px 0 22px;max-width:560px">A calm, 10-minute daily riyaz that gives a 4-year-old the basics of Indian classical singing, so he arrives at his first guru's class ready.</p>
+      <div><span class="pill">🧑‍🏫 Real voice only</span><span class="pill">🔁 Learns by echo</span><span class="pill">🪔 Soft &amp; calm</span><span class="pill">🎼 6 small levels</span></div>
+      <p class="note" style="margin-top:18px">Design draft with mock screens · November 2026</p>
+    </div>
+    <div class="phones" id="p-title"></div>
+  </div>
+  <div class="foot"><span>Riyaz ki Shuruaat · Tiny Tunes v2 design draft</span><span>1</span></div>
+</section>
+
+<!-- 2 · Designed around him -->
+<section class="slide">
+  <div class="kicker">Why this approach</div>
+  <h2 style="margin-top:8px">Designed around how he learns</h2>
+  <div class="cards">
+    <div class="card"><div class="ce">🔁</div><div><h3>He echoes → we teach by echo</h3><p>Indian classical is taught guru–shishya: the teacher sings a phrase, the student sings it back. His echolalia makes this natural for him.</p></div></div>
+    <div class="card"><div class="ce">🧑‍🏫</div><div><h3>He copies exactly → real voice only</h3><p>No computer voices. Every phrase he hears is a real singer, in tune, at his Sa. The app checks each recording before he ever hears it.</p></div></div>
+    <div class="card"><div class="ce">⭐</div><div><h3>He loves rhymes → rhymes lead to sargam</h3><p>Twinkle Twinkle is <b>Sa Sa Pa Pa Dha Dha Pa · Ma Ma Ga Ga Re Re Sa</b>. A tune he knows, with new note names.</p></div></div>
+    <div class="card"><div class="ce">🪔</div><div><h3>Loud sounds excite him → everything calm</h3><p>Volume limit, soft tanpura, no clapping or cheering sounds, a glowing diya instead of fireworks, and a <b>बस</b> (stop) button always on screen.</p></div></div>
+  </div>
+  <div class="band"><span style="font-weight:700;white-space:nowrap">The goal: 4 foundations</span>
+    <span class="f"><b>Sur</b>singing in tune</span><span class="f"><b>Swar gyaan</b>note names</span><span class="f"><b>Alankar</b>patterns</span><span class="f"><b>Laya</b>steady beat</span></div>
+  <div class="cmp">
+    <div class="ch"></div><div class="ch old">First app</div><div class="ch new">New design</div>
+    <div class="cl">Who sings</div><div class="co">He tapped keys; a computer voice sang</div><div class="cn">He sings; a real teacher's voice leads</div>
+    <div class="cl">Notes</div><div class="co">8 notes from C up to high C</div><div class="cn">One note first (Sa at D), inside his range</div>
+    <div class="cl">His voice</div><div class="co">Nothing happened when he sang</div><div class="cn">His voice moves the diya, which glows on the note</div>
+  </div>
+  <p class="note" style="margin-top:12px">Based on: the guru–shishya echo tradition · studies on sung vs spoken words and parent-coached music (MAP trial, 2024) · research on adults copying children's sounds · children's comfortable singing range (about D4–A4).</p>
+  <div class="foot"><span>Riyaz ki Shuruaat · Tiny Tunes v2 design draft</span><span>2</span></div>
+</section>
+
+<!-- 3 · Daily routine -->
+<section class="slide">
+  <div style="display:grid;grid-template-columns:600px 1fr;gap:30px;height:620px">
+    <div>
+      <div class="kicker">Every day</div>
+      <h2 style="margin-top:8px">One calm riyaz, about 10 minutes</h2>
+      <div class="sched">
+        <div class="si"><span class="n">1</span><span class="e">🙏</span><span class="t">Namaste song<small>the same song every day, so he knows riyaz has started</small></span><span class="m">1 min</span></div>
+        <div class="si"><span class="n">2</span><span class="e">🪔</span><span class="t">Sa with tanpura<small>find and hold the home note</small></span><span class="m">2 min</span></div>
+        <div class="si"><span class="n">3</span><span class="e">👂</span><span class="t">Echo game<small>teacher sings, he sings back</small></span><span class="m">3 min</span></div>
+        <div class="si"><span class="n">4</span><span class="e">⭐</span><span class="t">Today's piece<small>a rhyme in sargam, or an alankar</small></span><span class="m">2 min</span></div>
+        <div class="si"><span class="n">5</span><span class="e">👏</span><span class="t">Clap the taal<small>steady beat, clap and wave</small></span><span class="m">1 min</span></div>
+        <div class="si"><span class="n">6</span><span class="e">🪔</span><span class="t">Riyaz ho gaya<small>a quiet ending: the diya lights up</small></span><span class="m">30 sec</span></div>
+      </div>
+      <p class="note" style="margin-top:14px;width:560px">Same order every day. He can press <b>बस</b> (stop) at any time; ending happily matters more than finishing.</p>
+    </div>
+    <div class="phones" id="p-routine"></div>
+  </div>
+  <div class="foot"><span>Riyaz ki Shuruaat · Tiny Tunes v2 design draft</span><span>3</span></div>
+</section>
+
+<!-- 4 · Six levels -->
+<section class="slide">
+  <div class="kicker">The journey</div>
+  <h2 style="margin-top:8px">6 levels, one small step at a time</h2>
+  <div class="stairs">
+    <div class="col" style="--lc:var(--saf)"><div class="lab"><div class="num">LEVEL 1</div><div class="nm">Sa ka ghar</div><div class="dv">सा का घर</div></div><div class="blk" style="height:120px">Find Sa and hold it with the tanpura<div class="ex">"Saaa…"</div></div></div>
+    <div class="col" style="--lc:var(--ind)"><div class="lab"><div class="num">LEVEL 2</div><div class="nm">Echo</div><div class="dv">सुनो और गाओ</div></div><div class="blk" style="height:160px">Sing back short 2–3 note phrases<div class="ex">Sa Re Ga · Ga Re Sa</div></div></div>
+    <div class="col" style="--lc:var(--leaf)"><div class="lab"><div class="num">LEVEL 3</div><div class="nm">Rhymes in sargam</div><div class="dv">कविता में सरगम</div></div><div class="blk" style="height:200px">Learn note names through a rhyme he already knows<div class="ex" style="font-size:13px;white-space:nowrap">Sa Sa Pa Pa Dha Dha Pa</div></div></div>
+    <div class="col" style="--lc:var(--teal)"><div class="lab"><div class="num">LEVEL 4</div><div class="nm">Aaroh–avaroh</div><div class="dv">आरोह–अवरोह, अलंकार</div></div><div class="blk" style="height:240px">Up and down the scale, then simple alankars<div class="ex">Sa Re Ga Ma Pa · Pa Ma Ga Re Sa</div></div></div>
+    <div class="col" style="--lc:var(--rose)"><div class="lab"><div class="num">LEVEL 5</div><div class="nm">Taal</div><div class="dv">ताल</div><span class="alongside">runs alongside 2–4</span></div><div class="blk" style="height:200px">Steady beat, then Keherwa (8) and Dadra (6)<div class="ex">👏 1 2 3 4 · 👋 5 6 7 8</div></div></div>
+    <div class="col" style="--lc:var(--vio)"><div class="lab"><div class="num">LEVEL 6</div><div class="nm">First raag</div><div class="dv">राग भूपाली</div></div><div class="blk" style="height:280px">Bhoopali: a real raag with only 5 notes<div class="ex">Sa Re Ga Pa Dha</div></div></div>
+  </div>
+  <div class="under">
+    <div><b>MOVE ON WHEN</b>he hums Sa with the drone most days</div>
+    <div><b>MOVE ON WHEN</b>he echoes most phrases close to pitch</div>
+    <div><b>MOVE ON WHEN</b>he sings a line on his own</div>
+    <div><b>MOVE ON WHEN</b>Sa → Pa → Sa is in tune, slowly</div>
+    <div><b>MOVE ON WHEN</b>he claps steadily with the beat</div>
+    <div><b>THEN</b>he is ready for a guru's beginner class</div>
+  </div>
+  <p class="note" style="margin-top:10px">No fixed timeline: expect weeks per level, not days. Going back a level is fine; it isn't failing.</p>
+  <div class="foot"><span>Riyaz ki Shuruaat · Tiny Tunes v2 design draft</span><span>4</span></div>
+</section>
+
+<!-- 5 · Level 1 -->
+<section class="slide" style="--lc:var(--saf)">
+  <div class="lvl">
+    <div>
+      <span class="badge">LEVEL 1</span>
+      <h2>Sa ka ghar<span class="dev">सा का घर</span></h2>
+      <p class="goal">Find <b>Sa</b>, the home note, and hold it with the tanpura for 2–3 seconds.</p>
+      <div class="sec"><h4>In a session</h4><ol class="steps">
+        <li>The tanpura fades in softly at his Sa.</li>
+        <li>The teacher's clip sings <span class="sg">"mmm…"</span> then <span class="sg">"Saaa…"</span>; the Sa step lights up.</li>
+        <li>His turn: a small diya moves with his voice and glows when he is on Sa.</li>
+        <li>3–5 tries, then on to the next part of the riyaz.</li>
+      </ol></div>
+      <div class="sec"><h4>On screen</h4><ul class="dots2">
+        <li>Only one step, Sa, so there is nothing else to think about.</li>
+        <li>No score and no "wrong" sound; close is celebrated with a softer glow.</li>
+      </ul></div>
+      <div class="boxes">
+        <div class="box move"><b>Move on when</b>He hums or sings Sa with the drone most days.</div>
+        <div class="box tip"><b>Parent tip</b>Hum along with him. If he gets excited and loud, sing softer; he copies volume too.</div>
+      </div>
+    </div>
+    <div class="phones" id="p-l1"></div>
+  </div>
+  <div class="foot"><span>Riyaz ki Shuruaat · Tiny Tunes v2 design draft</span><span>5</span></div>
+</section>
+
+<!-- 6 · Level 2 -->
+<section class="slide" style="--lc:var(--ind)">
+  <div class="lvl">
+    <div>
+      <span class="badge">LEVEL 2</span>
+      <h2>Echo<span class="dev">सुनो और गाओ</span></h2>
+      <p class="goal">Sing back short 2–3 note phrases, the guru–shishya way.</p>
+      <div class="sec"><h4>In a session</h4><ol class="steps">
+        <li>The teacher sings a phrase; each note's step lights as it is sung.</li>
+        <li>His turn: dots trace his notes on the steps; each matched note glows.</li>
+        <li>Up to 8 phrases, starting small: <span class="sg">Sa Re Sa · Sa Re Ga · Ga Re Sa · Sa Pa Sa</span></li>
+      </ol></div>
+      <div class="sec"><h4>On screen</h4><ul class="dots2">
+        <li>Only the notes in today's phrases are shown (Sa, Re, Ga at first).</li>
+        <li>"सुनो" (listen) and "अब तुम" (your turn) always show whose turn it is.</li>
+      </ul></div>
+      <div class="boxes">
+        <div class="box move"><b>Move on when</b>He echoes most phrases close to pitch.</div>
+        <div class="box tip"><b>Parent tip</b>His echolalia helps here. Let him repeat a phrase as often as he likes; if he sings it later in the day, sing it back.</div>
+      </div>
+    </div>
+    <div class="phones" id="p-l2"></div>
+  </div>
+  <div class="foot"><span>Riyaz ki Shuruaat · Tiny Tunes v2 design draft</span><span>6</span></div>
+</section>
+
+<!-- 7 · Level 3 -->
+<section class="slide" style="--lc:var(--leaf)">
+  <div class="lvl">
+    <div>
+      <span class="badge">LEVEL 3</span>
+      <h2>Rhymes in sargam<span class="dev">कविता में सरगम</span></h2>
+      <p class="goal">Learn the note names through a rhyme he already loves.</p>
+      <div class="sec"><h4>In a session</h4><ol class="steps">
+        <li>The teacher sings one line with words: <i>"Twinkle twinkle little star"</i>.</li>
+        <li>The same line in sargam: <span class="sg">Sa Sa Pa Pa Dha Dha Pa</span>.</li>
+        <li>He echoes the sargam line; each note chip lights as he sings it.</li>
+        <li>Next line: <span class="sg">Ma Ma Ga Ga Re Re Sa</span>. Later, the whole rhyme together.</li>
+      </ol></div>
+      <div class="sec"><h4>On screen</h4><ul class="dots2">
+        <li>A picture for the rhyme, the words in small text, and big coloured note chips.</li>
+        <li>One line at a time (6 lines in Twinkle).</li>
+      </ul></div>
+      <div class="boxes">
+        <div class="box move"><b>Move on when</b>He sings a line on his own.</div>
+        <div class="box tip"><b>Parent tip</b>Add his other favourite rhymes next. His teacher can write their sargam, and you record them in the app.</div>
+      </div>
+    </div>
+    <div class="phones" id="p-l3"></div>
+  </div>
+  <div class="foot"><span>Riyaz ki Shuruaat · Tiny Tunes v2 design draft</span><span>7</span></div>
+</section>
+
+<!-- 8 · Level 4 -->
+<section class="slide" style="--lc:var(--teal)">
+  <div class="lvl">
+    <div>
+      <span class="badge">LEVEL 4</span>
+      <h2>Aaroh–avaroh<span class="dev">आरोह–अवरोह</span></h2>
+      <p class="goal">Go up and down the scale in tune, slowly, then simple alankars.</p>
+      <div class="sec"><h4>In a session</h4><ol class="steps">
+        <li>Aaroh <span class="sg">Sa Re Ga Ma Pa</span>, then avaroh <span class="sg">Pa Ma Ga Re Sa</span>; he echoes each.</li>
+        <li>Alankars in pairs: <span class="sg">SaRe ReGa GaMa MaPa</span>, then threes: <span class="sg">SaReGa ReGaMa GaMaPa</span>.</li>
+        <li>Dha, Ni and upper Sa are added only when his voice is ready.</li>
+      </ol></div>
+      <div class="sec"><h4>On screen</h4><ul class="dots2">
+        <li>The full ladder Sa → Pa; the title says "going up" or "coming down".</li>
+        <li>About one note per second; the app never speeds up by itself.</li>
+      </ul></div>
+      <div class="boxes">
+        <div class="box move"><b>Move on when</b>Sa → Pa → Sa is in tune at slow speed.</div>
+        <div class="box tip"><b>Parent tip</b>Slow is correct. Show "up" and "down" with your hand as he sings.</div>
+      </div>
+    </div>
+    <div class="phones" id="p-l4"></div>
+  </div>
+  <div class="foot"><span>Riyaz ki Shuruaat · Tiny Tunes v2 design draft</span><span>8</span></div>
+</section>
+
+<!-- 9 · Level 5 -->
+<section class="slide" style="--lc:var(--rose)">
+  <div class="lvl">
+    <div>
+      <span class="badge">LEVEL 5 · ALONGSIDE LEVELS 2–4</span>
+      <h2>Taal<span class="dev">ताल</span></h2>
+      <p class="goal">Keep a steady beat, then Keherwa (8 beats) and Dadra (6 beats).</p>
+      <div class="sec"><h4>In a session (1 minute a day)</h4><ol class="steps">
+        <li>Clap steadily with a slow, soft beat; no counting yet.</li>
+        <li>Keherwa: <b>clap</b> on 1 (taali), <b>wave</b> on 5 (khaali), counting 1–8.</li>
+        <li>Dadra: clap on 1, wave on 4, counting 1–6.</li>
+        <li>Later, the bols: <span class="sg">Dha Ge Na Ti | Na Ka Dhi Na</span>.</li>
+      </ol></div>
+      <div class="sec"><h4>On screen</h4><ul class="dots2">
+        <li>Beat circles light up in turn; a hand picture shows clap 👏 or wave 👋.</li>
+        <li>A quiet beat; no sound effects for a missed clap.</li>
+      </ul></div>
+      <div class="boxes">
+        <div class="box move"><b>Move on when</b>He claps steadily with the beat.</div>
+        <div class="box tip"><b>Parent tip</b>Start by patting his knees together to the beat; touch helps rhythm. Keep it quiet.</div>
+      </div>
+    </div>
+    <div class="phones" id="p-l5"></div>
+  </div>
+  <div class="foot"><span>Riyaz ki Shuruaat · Tiny Tunes v2 design draft</span><span>9</span></div>
+</section>
+
+<!-- 10 · Level 6 -->
+<section class="slide" style="--lc:var(--vio)">
+  <div class="lvl">
+    <div>
+      <span class="badge">LEVEL 6</span>
+      <h2>First raag<span class="dev">राग भूपाली</span></h2>
+      <p class="goal">A first taste of a real raag. Bhoopali uses only 5 notes: <b>Sa Re Ga Pa Dha</b>.</p>
+      <div class="sec"><h4>In a session</h4><ol class="steps">
+        <li>Aaroh <span class="sg">Sa Re Ga Pa Dha</span> and back, by echo (no Ma, no Ni).</li>
+        <li>Short raag phrases: <span class="sg">Sa Re Ga · Ga Re Sa · Ga Pa Dha Pa · Dha Pa Ga Re Sa</span>.</li>
+        <li>Upper Sa joins when his voice is ready.</li>
+      </ol></div>
+      <div class="sec"><h4>On screen</h4><ul class="dots2">
+        <li>The ladder shows Ma and Ni greyed out: "not in this raag".</li>
+        <li>The same echo game as Level 2, with raag phrases.</li>
+      </ul></div>
+      <div class="boxes">
+        <div class="box move"><b>Then</b>He is ready for a guru's beginner (Prarambhik-level) classes.</div>
+        <div class="box tip"><b>Parent tip</b>His teacher may prefer another first raag, such as Yaman. The app works with whatever notes they record.</div>
+      </div>
+    </div>
+    <div class="phones" id="p-l6"></div>
+  </div>
+  <div class="foot"><span>Riyaz ki Shuruaat · Tiny Tunes v2 design draft</span><span>10</span></div>
+</section>
+
+<!-- 11 · Grown-ups corner -->
+<section class="slide" style="--lc:var(--ind)">
+  <div class="lvl">
+    <div>
+      <span class="badge">FOR PARENTS AND TEACHER</span>
+      <h2>Grown-ups corner<span class="dev">🔒</span></h2>
+      <p class="goal">Opened by holding the lock for 2 seconds, so he can't change settings by accident.</p>
+      <div class="sec"><h4>Recording studio</h4><ul class="dots2">
+        <li>About 30 short clips, recorded once by his teacher or a parent.</li>
+        <li>The tanpura plays while recording; the app checks the pitch of every clip and asks for a retake if a note is off, so he only ever copies an in-tune voice.</li>
+      </ul></div>
+      <div class="sec"><h4>Settings</h4><ul class="dots2">
+        <li><b>Sa pitch:</b> starts at D (safed 2); his teacher can change it.</li>
+        <li><b>Volume limit</b>, tanpura level, slow speed, which levels are open.</li>
+      </ul></div>
+      <div class="sec"><h4>Today's log</h4><ul class="dots2">
+        <li>What he did today (Sa, echoes, taal, minutes), to share with his teacher.</li>
+      </ul></div>
+      <div class="sec"><h4>Privacy</h4><ul class="dots2">
+        <li>Recordings stay on the phone. No ads, no account, works without internet.</li>
+      </ul></div>
+    </div>
+    <div class="phones" id="p-gu"></div>
+  </div>
+  <div class="foot"><span>Riyaz ki Shuruaat · Tiny Tunes v2 design draft</span><span>11</span></div>
+</section>
+
+<!-- 12 · What's needed -->
+<section class="slide">
+  <div class="kicker">To build it</div>
+  <h2 style="margin-top:8px">The recording script and next steps</h2>
+  <div style="display:grid;grid-template-columns:620px 1fr;gap:36px">
+    <div>
+      <table class="rs">
+        <tr><td>Daily routine</td><td>Namaste song · "Riyaz ho gaya" ending</td><td>2</td></tr>
+        <tr><td>Level 1</td><td>Sa hum · Sa "aa" short · Sa "aa" long</td><td>3</td></tr>
+        <tr><td>Level 2</td><td>8 echo phrases (Sa Re Sa … Sa Pa Sa)</td><td>8</td></tr>
+        <tr><td>Level 3</td><td>Twinkle: 6 lines in sargam + whole rhyme</td><td>7</td></tr>
+        <tr><td>Level 4</td><td>Aaroh · avaroh · 3 alankars</td><td>5</td></tr>
+        <tr><td>Level 5</td><td>Keherwa and Dadra counting with claps</td><td>2</td></tr>
+        <tr><td>Level 6</td><td>Bhoopali aaroh · avaroh · 3 phrases</td><td>5</td></tr>
+        <tr class="tot"><td>Total</td><td>about 20–25 minutes, including retakes</td><td>32 clips</td></tr>
+      </table>
+    </div>
+    <div style="margin-top:16px">
+    <div class="next">
+      <div class="kicker" style="color:var(--ind)">Next steps</div>
+      <ol>
+        <li>You approve this design, or tell me what to change.</li>
+        <li>I send a soft tanpura sample for you to approve.</li>
+        <li>I build the routine, Levels 1–3 and the grown-ups corner first, as an APK like before.</li>
+        <li>His teacher or a parent records the clips in the app.</li>
+        <li>Then Levels 4–6.</li>
+      </ol>
+    </div>
+    <div class="callout"><b>Who records?</b> Ideally his future teacher, so the voice he copies at home is the voice he learns from in class. A parent can record too, if they can hold Sa steadily with the tanpura; the pitch check will show it.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Riyaz ki Shuruaat · Tiny Tunes v2 design draft</span><span>12</span></div>
+</section>
+
+<script>
+const NOTES={Sa:{c:'#E8913A',d:'सा'},Re:{c:'#D9A23A',d:'रे'},Ga:{c:'#6E9F5A',d:'ग'},Ma:{c:'#3E9490',d:'म'},Pa:{c:'#4F70BE',d:'प'},Dha:{c:'#7F62B8',d:'ध'},Ni:{c:'#BE5F92',d:'नि'},"Sa'":{c:'#E8913A',d:'सां'}};
+function ladder(o){
+  const n=o.notes.length,H=o.h||250,pad=16;
+  const step=n>1?(H-2*pad)/(n-1):0;
+  const y=v=>n>1?H-pad-v*step:H/2-v*44;
+  let s=`<div class="lad" style="height:${H}px">`;
+  o.notes.forEach((k,i)=>{const N=NOTES[k];const st=(o.lit||[]).includes(k)?'on':(o.grey||[]).includes(k)?'grey':'';
+    s+=`<div class="rung ${st}" style="top:${y(i)-13}px;--c:${N.c}"><span class="nl">${k}<i>${N.d}</i></span><span class="bar"></span></div>`});
+  if(o.trace){const pts=o.trace.map(([x,v])=>`${58+x*140},${y(v)}`).join(' ');s+=`<svg class="trace" width="206" height="${H}"><polyline points="${pts}"/></svg>`}
+  if(o.diya){const [x,v]=o.diya;s+=`<div class="diya ${o.glow?'glow':''}" style="left:${58+x*140-13}px;top:${y(v)-27}px">🪔</div>`}
+  if(o.arrow)s+=`<div class="arrow" style="top:${H/2-14}px">${o.arrow}</div>`;
+  return s+'</div>';
+}
+function chips(arr,state){return `<div class="chips">${arr.map((k,i)=>`<span class="chip ${state(i)}" style="--c:${NOTES[k.replace(/[0-9]/g,'')]?.c||'#888'}">${k.replace(/[0-9]/g,'')}</span>`).join('')}</div>`}
+const tbar=t=>`<div class="tbar"><span class="tb ${t=='listen'?'on':''}">👂 सुनो</span><span class="tb ${t=='you'?'on you':''}">🧒 अब तुम</span></div>`;
+const defFoot=`<div class="ft"><span class="kb">↺ फिर से</span><span class="kb stop">✋ बस</span></div>`;
+function phone(o){
+  const dots=[0,1,2,3,4,5].map(i=>`<i class="${i<o.step?'done':i==o.step?'cur':''}"></i>`).join('');
+  return `<div class="ph"><div class="phone"><div class="screen"><div class="notch"></div>
+   <div class="sb"><span class="dots">${o.step==null?'':dots}</span>${o.tanpura?'<span class="tp">तानपुरा · Sa = D</span>':''}</div>
+   ${o.title?`<div class="st">${o.title}${o.sub?`<small>${o.sub}</small>`:''}</div>`:''}
+   ${o.turn?tbar(o.turn):''}
+   <div class="body">${o.body}</div>
+   ${o.foot===undefined?defFoot:o.foot}
+  </div></div><div class="cap">${o.cap||''}</div></div>`;
+}
+const T=(id,...p)=>document.getElementById(id).innerHTML=p.join('');
+const bub=(t)=>`<div class="bub"><span class="av">🧑‍🏫</span><span>${t}</span></div>`;
+
+/* Home */
+const home=phone({step:null,title:'आज का रियाज़',sub:"Today's riyaz",body:`
+  <div class="rl cur"><span class="e">🙏</span>नमस्ते<span class="m">1 min</span></div>
+  <div class="rl"><span class="e">🪔</span>सा<span class="m">2 min</span></div>
+  <div class="rl"><span class="e">👂</span>सुनो और गाओ<span class="m">3 min</span></div>
+  <div class="rl"><span class="e">⭐</span>ट्विंकल सरगम<span class="m">2 min</span></div>
+  <div class="rl"><span class="e">👏</span>ताल<span class="m">1 min</span></div>
+  <div class="go">शुरू ▶</div>
+  <div class="wk"><span class="on">🪔</span><span class="on">🪔</span><span class="on">🪔</span><span class="on">🪔</span><span>🪔</span><span>🪔</span><span>🪔</span></div>`,
+  foot:`<div class="ft" style="justify-content:center"><span class="kb" style="font-size:12px">🔒 Grown-ups (hold)</span></div>`,
+  cap:'<b>Home</b> · today\'s riyaz in the same order every day; one diya per day practised'});
+const l1you=phone({step:1,tanpura:true,title:'सा का घर',turn:'you',body:ladder({notes:['Sa'],lit:['Sa'],h:230,trace:[[0,-1.6],[.18,-1.2],[.32,-.5],[.45,-.15],[.6,.05],[.75,-.03],[.88,0]],diya:[.88,0],glow:true})+'<div class="lyr">Saaa… hold it</div>',
+  cap:'<b>Ab tum</b> · his diya rises with his voice and glows on Sa'});
+T('p-title',home,l1you);
+
+/* Routine */
+T('p-routine',
+ phone({step:0,tanpura:true,title:'नमस्ते',turn:'listen',body:`<div class="big">🙏</div>${bub('नमस्ते, नमस्ते…')}<div class="lyr">"…आओ गाएँ साथ"<br>the same hello song every day</div>`,
+   cap:'<b>Step 1</b> · the hello song, sung by his teacher'}),
+ phone({step:6,title:'',body:`<div class="big glowbig" style="font-size:78px">🪔</div><div style="font-weight:800;font-size:24px">रियाज़ हो गया</div><div class="prog">Riyaz done · 9 min · शाबाश</div><div class="wk" style="margin-top:6px"><span class="on">🪔</span><span class="on">🪔</span><span class="on">🪔</span><span class="on">🪔</span><span class="on">🪔</span><span>🪔</span><span>🪔</span></div>`,
+   foot:`<div class="ft"><span class="kb">↺ फिर से</span><span class="kb">🏠 घर</span></div>`,
+   cap:'<b>Step 6</b> · a quiet ending: no sound effects, the diya just glows'}));
+
+/* Level 1 */
+T('p-l1',
+ phone({step:1,tanpura:true,title:'सा का घर',turn:'listen',body:`${bub('mmm… Saaa…')}${ladder({notes:['Sa'],lit:['Sa'],h:190})}`,
+   cap:'<b>Suno</b> · the teacher sings Sa; the Sa step lights up'}),
+ l1you);
+
+/* Level 2 */
+T('p-l2',
+ phone({step:2,tanpura:true,title:'सुनो और गाओ',sub:'phrase 2 of 8',turn:'listen',body:`${bub('Sa Re Ga')}${ladder({notes:['Sa','Re','Ga'],lit:['Re'],h:190})}${chips(['Sa','Re','Ga'],i=>i==0?'done':i==1?'cur':'')}`,
+   cap:'<b>Suno</b> · each step lights as the teacher sings it'}),
+ phone({step:2,tanpura:true,title:'सुनो और गाओ',sub:'phrase 2 of 8',turn:'you',body:`${ladder({notes:['Sa','Re','Ga'],lit:['Ga'],h:230,trace:[[0,0],[.3,0],[.38,1],[.6,1],[.68,2],[.86,2]],diya:[.86,2],glow:true})}${chips(['Sa','Re','Ga'],i=>i<2?'done':'cur')}`,
+   cap:'<b>Ab tum</b> · his voice climbs the steps; matched notes glow'}));
+
+/* Level 3 */
+const tw=['Sa','Sa','Pa','Pa','Dha','Dha','Pa'];
+T('p-l3',
+ phone({step:3,tanpura:true,title:'ट्विंकल सरगम',sub:'line 1 of 6',turn:'listen',body:`<div class="big">⭐</div><div class="lyr">"Twinkle twinkle little star"</div>${bub('Sa Sa Pa Pa…')}${chips(tw,i=>i<3?'done':i==3?'cur':'')}`,
+   cap:'<b>Suno</b> · first with words, then the same line in sargam'}),
+ phone({step:3,tanpura:true,title:'ट्विंकल सरगम',sub:'line 1 of 6',turn:'you',body:`<div class="big glowbig" style="font-size:54px">⭐</div>${chips(tw,i=>i<5?'done':i==5?'cur':'')}<div style="position:relative;height:30px;width:206px"><div class="diya glow" style="left:120px;top:0">🪔</div></div><div class="lyr">each chip lights as he sings it</div>`,
+   cap:'<b>Ab tum</b> · he sings the sargam line back'}));
+
+/* Level 4 */
+T('p-l4',
+ phone({step:3,tanpura:true,title:'आरोह',sub:'going up',turn:'you',body:ladder({notes:['Sa','Re','Ga','Ma','Pa'],lit:['Ga'],h:290,trace:[[0,0],[.14,0],[.2,1],[.34,1],[.4,2],[.55,2]],diya:[.55,2],glow:true}),
+   cap:'<b>Aaroh</b> · Sa Re Ga Ma Pa, one step at a time'}),
+ phone({step:3,tanpura:true,title:'अलंकार',sub:'in pairs',turn:'listen',body:`<div class="chips" style="gap:7px">${['SaRe','ReGa','GaMa','MaPa'].map((p,i)=>`<span class="chip ${i==0?'done':i==1?'cur':''}" style="--c:${NOTES[p.match(/[A-Z][a-z]+/g)[1]].c}">${p.replace(/([a-z])([A-Z])/,'$1 $2')}</span>`).join('')}</div>${ladder({notes:['Sa','Re','Ga','Ma','Pa'],lit:['Re','Ga'],h:170})}<div class="lyr">then down: PaMa · MaGa · GaRe · ReSa</div>`,
+   cap:'<b>Alankar</b> · patterns in pairs, then in threes'}));
+
+/* Level 5 */
+const beats=(n,split,cur,icons)=>{let r='',row='';for(let i=1;i<=n;i++){row+=`<div class="beat ${i==cur?'cur':''}">${icons[i]?`<span class="ic">${icons[i]}</span>`:''}${i}</div>`;if(i==split||i==n){r+=`<div class="taalrow">${row}</div>`+(i<n?'<div class="taalgap"></div>':'');row=''}}return r};
+T('p-l5',
+ phone({step:4,title:'केहरवा',sub:'8 beats · slow',turn:null,body:`${beats(8,4,3,{1:'👏',5:'👋'})}<div class="lyr" style="margin-top:6px">👏 clap on 1 · 👋 wave on 5</div>`,
+   cap:'<b>Keherwa</b> · beat circles light in turn with a soft beat'}),
+ phone({step:4,title:'दादरा',sub:'6 beats · slow',turn:null,body:`${beats(6,3,4,{1:'👏',4:'👋'})}<div class="big" style="font-size:44px;margin-top:4px">👋</div><div class="lyr">now: wave (khaali)</div>`,
+   cap:'<b>Dadra</b> · the hand picture shows clap or wave'}));
+
+/* Level 6 */
+T('p-l6',
+ phone({step:2,tanpura:true,title:'राग भूपाली',sub:'5 notes',turn:'listen',body:`${bub('Ga Pa Dha Pa')}${ladder({notes:['Sa','Re','Ga','Ma','Pa','Dha','Ni'],lit:['Dha'],grey:['Ma','Ni'],h:236})}`,
+   cap:'<b>Suno</b> · Ma and Ni are greyed out: not in this raag'}),
+ phone({step:2,tanpura:true,title:'राग भूपाली',sub:'phrase 3 of 5',turn:'you',body:`${ladder({notes:['Sa','Re','Ga','Ma','Pa','Dha','Ni'],lit:['Pa'],grey:['Ma','Ni'],h:236,trace:[[0,2],[.16,2],[.22,4],[.4,4],[.46,5],[.62,5],[.68,4],[.82,4]],diya:[.82,4],glow:true})}${chips(['Ga','Pa','Dha','Pa'],i=>i<3?'done':'cur')}`,
+   cap:'<b>Ab tum</b> · the same echo game, now with raag phrases'}));
+
+/* Grown-ups */
+T('p-gu',
+ phone({step:null,title:'🎙️ Recording studio',sub:'his teacher records once',body:`
+  <div class="gl"><span>Sa · hum</span><span class="ok">✓ in tune</span></div>
+  <div class="gl"><span>Sa · "aa"</span><span class="ok">✓ in tune</span></div>
+  <div class="gl"><span>Sa Re Ga</span><span class="warn">Re a little low<br>↺ record again</span></div>
+  <div class="gl"><span>Twinkle · line 1</span><span class="rec">● record</span></div>
+  <div class="meter">Now singing: <b style="color:#3F8A4A">Sa · in tune</b><div class="scale"><div class="needle" style="left:49%"></div></div></div>
+  <div class="recbtn"></div>`,foot:`<div class="ft" style="justify-content:center"><span class="prog">tanpura plays while you record</span></div>`,
+  cap:'<b>Recording studio</b> · every clip is pitch-checked'}),
+ phone({step:null,title:'⚙️ Settings',body:`
+  <div class="sl"><span>Sa (scale)</span><span class="v">− D · safed 2 +</span></div>
+  <div class="sl"><span>Volume limit</span><span class="track"><b style="width:40%"></b><i style="left:34%"></i></span></div>
+  <div class="sl"><span>Tanpura</span><span class="track"><b style="width:30%"></b><i style="left:24%"></i></span></div>
+  <div class="sl"><span>Speed</span><span class="v">slow</span></div>
+  <div class="sl"><span>Levels open</span><span class="v">1 · 2 · 5</span></div>
+  <div class="log"><b>TODAY</b>Sa ✓ · echoes 5 of 8 · taal ✓<br>9 minutes · stopped once (बस)</div>`,foot:`<div class="ft" style="justify-content:center"><span class="kb" style="font-size:12px">← back</span></div>`,
+  cap:'<b>Settings and log</b> · his Sa, volume limit, progress'}));
+</script>
+</body></html>
