@@ -25,6 +25,24 @@ jobs:
           npx cap sync android
           sed -i 's#</manifest>#<uses-permission android:name="android.permission.RECORD_AUDIO"/><uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/></manifest>#' android/app/src/main/AndroidManifest.xml
           grep RECORD_AUDIO android/app/src/main/AndroidManifest.xml
+      - name: Keep the screen on while the app is open
+        run: |
+          cat > android/app/src/main/java/com/kiaanwankhede/tinytunes/MainActivity.java <<'EOF'
+          package com.kiaanwankhede.tinytunes;
+
+          import android.os.Bundle;
+          import android.view.WindowManager;
+          import com.getcapacitor.BridgeActivity;
+
+          public class MainActivity extends BridgeActivity {
+            @Override
+            public void onCreate(Bundle savedInstanceState) {
+              super.onCreate(savedInstanceState);
+              getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
+          }
+          EOF
+          cat android/app/src/main/java/com/kiaanwankhede/tinytunes/MainActivity.java
       - name: Use fixed signing key (so updates install over old versions)
         run: mkdir -p ~/.android && cp debug.keystore ~/.android/debug.keystore
       - name: Build debug APK
