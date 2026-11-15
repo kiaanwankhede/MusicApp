@@ -1,24 +1,30 @@
 # Tiny Tunes 🎵
 
-A calm music-learning web app (installable PWA) for a young autistic child. Lessons: **Stage 1** Sa Re Ga Ma Pa, **Stage 2** adds Dha Ni, **Stage 3** the full scale up to the upper Sa (changed in Grown-ups). Only the next key is enabled and glowing; tapping it plays the note and unlocks the following one, so a wrong tap is impossible.
+A calm daily practice app that teaches a young autistic child the basics of Indian classical singing, one small level at a time (plan: [Riyaz ki Shuruaat](docs/presentation/README.md)).
 
-- No ads, accounts, network calls or tracking. Settings and progress are stored only in the device's `localStorage`.
-- A real piano-key layout: tapping a key **sings** its syllable (Sa, Re, Ga, Ma, Pa) with a natural neural singing voice (see `voices/README.md`), and the big syllable appears on screen.
-- Parent area (hold the lock for 1.5s): **record your own voice** for each note (stored only on the device and used instead of the built-in voice), volume, guided/free play, calm mode, show/hide labels, counters.
-- Works offline once opened (service worker). On a phone: open the site → *Add to Home Screen*.
+## This version: Level 1 · Find Sa (test version)
+- **Listen:** a soft tanpura plays and a harmonium gives Sa (his home note, D by default).
+- **Your turn:** the tablet's microphone listens. A diya moves up and down with his voice and glows when he sings Sa; holding Sa for about a second counts as "found". Sa in a higher or lower octave also counts.
+- No scores, no "wrong" sounds, and an **Again** and a **Stop** button on screen at all times.
+- By default the tanpura fades out while he sings, so the microphone hears only him.
 
-## Run locally
-`python3 -m http.server 8000` and open http://localhost:8000 (service worker needs http, not file://).
+## Grown-ups corner (hold the lock for 2 seconds)
+- His Sa (C to F, shown with harmonium key names), **Hear Sa** button.
+- Volume limit, tanpura volume, "tanpura while he sings", calm mode.
+- How close counts as Sa (Easy / Normal / Strict), tries per practice, microphone sensitivity.
+- **Microphone check:** hum Sa to see that the tablet hears it, then stay quiet to see "Quiet".
+- Practice log for the last days (stays on the tablet).
+
+Everything stays on the device: no ads, no account, no internet needed after install.
 
 ## Android APK
-Every push to `main` builds an APK automatically (GitHub Actions) and attaches it to a new Release: open the repo → **Releases** → download `TinyTunes.apk` on your phone and install (allow "install unknown apps" once).
+Every push to `main` builds an APK automatically (GitHub Actions) and attaches it to a new Release: open the repo → **Releases** → download `TinyTunes.apk` on the tablet and install (allow "install unknown apps" once, and allow the microphone when the app asks).
 
-## Web hosting (optional)
-Settings → Pages → deploy from branch `main`, folder `/ (root)`.
+## Run in a browser
+`python3 -m http.server 8000` and open http://localhost:8000.
 
 ## Docs
-**[Design presentation with mock screens →](docs/presentation/README.md)** (new level-by-level plan: Riyaz ki Shuruaat)
+- **[Design presentation with mock screens →](docs/presentation/README.md)**
+- `docs/design.html`: first market research and design notes.
 
-`docs/design.html` — market research, design principles and mock screens.
-
-Not a medical product or a replacement for therapy; consult your child's care team.
+Not a medical product or a replacement for therapy or a music teacher.
