@@ -1,41 +1,51 @@
-# Riyaz ki Shuruaat · design presentation
+# Sur ki Neev · Riyaz together
 
-Mock screens for the new Tiny Tunes design: a calm daily riyaz that teaches a 4-year-old the basics of Indian classical singing, level by level.
+The new plan for music time, as slides with screens from the new app (weeks 0 to 2) and planned screens for later weeks. Tap any slide to open it full size.
 
-The same slides as a PDF: [Riyaz-ki-Shuruaat.pdf](Riyaz-ki-Shuruaat.pdf)
+The full plan, with every detail and the research sources: [plan.md](../plan.md)
 
-## 1 · Riyaz ki Shuruaat
-![Title slide with the home screen and the Sa screen](slides/slide-01.jpg)
+The same slides as a PDF: [Sur-ki-Neev.pdf](Sur-ki-Neev.pdf)
 
-## 2 · Designed around how he learns
-![Why this approach: echo, real voice, rhymes, calm](slides/slide-02.jpg)
+## 1 · Sur ki Neev
+![Title slide with the new app's home screen](slides/slide-01.jpg)
 
-## 3 · One calm riyaz, about 10 minutes
-![Daily routine with the Namaste and ending screens](slides/slide-03.jpg)
+## 2 · What the research found
+![Ten findings, each with how strong the evidence is](slides/slide-02.jpg)
 
-## 4 · 6 levels, one small step at a time
-![The six levels as a staircase](slides/slide-04.jpg)
+## 3 · The approach in one picture
+![He leads, you copy, a song with a gap, any sound carries it on; who does what](slides/slide-03.jpg)
 
-## 5 · Level 1 · Sa ka ghar (सा का घर)
-![Level 1: find and hold Sa](slides/slide-05.jpg)
+## 4 · The same six steps every day
+![The six daily steps with times, how to sit, his all done card and the minimum day](slides/slide-04.jpg)
 
-## 6 · Level 2 · Echo (सुनो और गाओ)
-![Level 2: echo 2–3 note phrases](slides/slide-06.jpg)
+## 5 · Week 0 · Set-up
+![Set-up tasks with the checklist, volume ceiling and his Sa screens](slides/slide-05.jpg)
 
-## 7 · Level 3 · Rhymes in sargam (कविता में सरगम)
-![Level 3: Twinkle Twinkle in sargam](slides/slide-07.jpg)
+## 6 · Week 1 · Awaaz (sound play)
+![Week 1 steps with the hello, copycat, free sing and quiet ending screens](slides/slide-06.jpg)
 
-## 8 · Level 4 · Aaroh–avaroh (आरोह–अवरोह)
-![Level 4: scale up and down, alankars](slides/slide-08.jpg)
+## 7 · Week 2 · Sa is home
+![Week 2 with the sing together, listen and wait, kite glide and home screens](slides/slide-07.jpg)
 
-## 9 · Level 5 · Taal (ताल)
-![Level 5: Keherwa and Dadra](slides/slide-09.jpg)
+## 8 · Weeks 3 and 4 · The singer arrives, then laya (planned)
+![Weeks 3 and 4 with planned screens and the Keherwa beats](slides/slide-08.jpg)
 
-## 10 · Level 6 · First raag (राग भूपाली)
-![Level 6: Raag Bhoopali](slides/slide-10.jpg)
+## 9 · Stages 1 and 2 · about months 1 to 6
+![Stage 1 Sa is home and stage 2 echo me, echo you](slides/slide-09.jpg)
 
-## 11 · Grown-ups corner
-![Recording studio and settings](slides/slide-11.jpg)
+## 10 · Stages 3 to 5 and a realistic timeline
+![Timeline to about age 7 with the teacher trial and the Prarambhik exam](slides/slide-10.jpg)
 
-## 12 · The recording script and next steps
-![Recording script and next steps](slides/slide-12.jpg)
+## 11 · Sound and calm rules
+![Sound rules, wound up or upset, and the Calm screen](slides/slide-11.jpg)
+
+## 12 · The singer
+![Who to ask, how she records, about 60 clips, and the backing tracks screen](slides/slide-12.jpg)
+
+## 13 · After music time, and the grown-ups corner
+![The three-tap log and the grown-ups corner screens](slides/slide-13.jpg)
+
+## 14 · What to do now, and what to expect
+![This week's tasks, a realistic 12-month goal and when to get help](slides/slide-14.jpg)
+
+Not a medical product.

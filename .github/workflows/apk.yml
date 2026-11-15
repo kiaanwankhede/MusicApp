@@ -16,34 +16,26 @@ jobs:
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: 17 }
       - name: Prepare web assets
-        run: mkdir www && cp index.html manifest.webmanifest icon.svg sw.js www/ && (cp -r voices www/ 2>/dev/null || true)
+        run: mkdir www && cp index.html fonts.css manifest.webmanifest icon.svg sw.js www/ && ls -la www
       - name: Create Android project (Capacitor)
         run: |
           npm init -y
           npm i @capacitor/core@6 @capacitor/cli@6 @capacitor/android@6
           npx cap init "Tiny Tunes" com.kiaanwankhede.tinytunes --web-dir=www
+          # bridge logging off: plugin calls (backing tracks, the data export about him) are not copied into logcat
+          rm -f capacitor.config.ts capacitor.config.js
+          echo '{"appId":"com.kiaanwankhede.tinytunes","appName":"Tiny Tunes","webDir":"www","loggingBehavior":"none"}' > capacitor.config.json
           npx cap add android
           npx cap sync android
           sed -i 's#</manifest>#<uses-permission android:name="android.permission.RECORD_AUDIO"/><uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/></manifest>#' android/app/src/main/AndroidManifest.xml
           grep RECORD_AUDIO android/app/src/main/AndroidManifest.xml
-      - name: Keep the screen on while the app is open
+          grep loggingBehavior android/app/src/main/assets/capacitor.config.json
+      - name: Add the native code (MainActivity + TinyTunes plugin)
         run: |
-          cat > android/app/src/main/java/com/kiaanwankhede/tinytunes/MainActivity.java <<'EOF'
-          package com.kiaanwankhede.tinytunes;
-
-          import android.os.Bundle;
-          import android.view.WindowManager;
-          import com.getcapacitor.BridgeActivity;
-
-          public class MainActivity extends BridgeActivity {
-            @Override
-            public void onCreate(Bundle savedInstanceState) {
-              super.onCreate(savedInstanceState);
-              getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            }
-          }
-          EOF
-          cat android/app/src/main/java/com/kiaanwankhede/tinytunes/MainActivity.java
+          DEST=android/app/src/main/java/com/kiaanwankhede/tinytunes
+          test -d "$DEST"
+          cp -f android-src/*.java "$DEST"/
+          for f in "$DEST"/*.java; do echo "===== $f"; cat "$f"; done
       - name: Use fixed signing key (so updates install over old versions)
         run: mkdir -p ~/.android && cp debug.keystore ~/.android/debug.keystore
       - name: Build debug APK
@@ -55,6 +47,6 @@ jobs:
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v1.${{ github.run_number }}
-          name: Tiny Tunes v1.${{ github.run_number }}
+          tag_name: v2.${{ github.run_number }}
+          name: Tiny Tunes v2.${{ github.run_number }}
           files: TinyTunes.apk
