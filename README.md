@@ -24,7 +24,8 @@ Every push to `main` builds an APK automatically (GitHub Actions) and attaches i
 `python3 -m http.server 8000` and open http://localhost:8000.
 
 ## Docs
-- **[Design presentation with mock screens →](docs/presentation/README.md)**
+- **[New plan: Sur ki Neev, based on fresh research (Nov 2026) →](docs/plan.md)**. This replaces the earlier plan. The app has not been changed to match it yet.
+- [Earlier design presentation with mock screens](docs/presentation/README.md)
 - `docs/design.html`: first market research and design notes.
 
 Not a medical product or a replacement for therapy or a music teacher.
