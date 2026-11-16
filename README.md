@@ -1,8 +1,17 @@
 # Tiny Tunes
 
-A calm, short daily music time for a young autistic child, to start the basics of Indian classical singing. The grown-up holds and works the tablet; the child never has to touch it. Nothing is scored, ever.
+A soft, colourful music app for a young autistic child, to start the basics of Indian classical singing (sargam). He can tap the big coloured keys himself; the guided music time is run by the grown-up. Nothing is scored, ever.
 
-This version (2.0) covers **weeks 0 to 2** of the plan [Sur ki Neev](docs/plan.md). Weeks 3 and later need a real singer's recordings and come in a later update; until then the app keeps running the week-2 routine.
+## The play screen (opens first)
+Big coloured keys **Sa Re Ga Ma Pa Dha Ni Sa** that he can tap: each plays one soft harmonium note at his Sa and lights up. The big screen above plays too: higher up = higher note.
+- **Play:** when he sings, a light moves up and down a coloured note ladder and the key of the note he is singing lights up. When he holds a note and stops, the app plays that note back to him softly (copying him). Shouting never makes anything bigger or brighter. If nobody plays for a while, a silent ripple runs up the keys and back to Sa.
+- **Copy me:** the app plays a note (Sa Sa Re Sa Ga Sa Re Ga Sa Pa Sa, always coming home to Sa) and its key bounces. Singing it back (any octave), or tapping it, makes the key jump with a shower of soft lights; any other steady sung answer counts as his turn. No wrong answers, no scores. After three unanswered notes it rests until the next tap.
+- **Songs:** Sa to Sa, Twinkle Twinkle, Jingle Bells and Mary Had a Little Lamb in sargam on harmonium, with an optional soft tanpura. The keys light in time and the notes slide along the ladder. After each song he can play it himself: each tap on the bouncing key plays the next note. From the third time he hears a song, it stops before the last Sa and waits for him to sing it (or tap Sa); after 5 seconds it finishes anyway.
+- The microphone is only switched on by the grown-up the first time ("Turn on mic"), so Android's permission pop-up never appears in front of him. Until the volume ceiling is set, everything plays extra softly.
+- No characters, no voices, no effect sounds. **Grown-ups (hold)** opens the guided music time and settings below.
+
+## Guided music time
+Version 2.1 also keeps the guided programme for **weeks 0 to 2** of the plan [Sur ki Neev](docs/plan.md). Weeks 3 and later need a real singer's recordings and come in a later update; until then the app keeps running the week-2 routine.
 
 ## Music time (4 to 8 minutes, the same six steps every day)
 1. **Hello:** the diya's wick lights (the "sound is coming" sign), then the harmonium plays the hello tune once at his Sa.
@@ -30,7 +39,7 @@ A 2-minute **minimum day** (Hello, one copycat turn, quiet ending) counts as a f
 Everything stays on the device: no ads, no account, no internet needed after install. No synthetic voices are used.
 
 ## Android APK
-Every push to `main` builds an APK (GitHub Actions) and attaches it to a new Release ("Tiny Tunes v2.N" for this version): open the repo, then **Releases**, download `TinyTunes.apk` on the tablet and install it (allow "install unknown apps" once, and allow the microphone when the app asks; it asks on the home screen, before music time). It installs over the earlier Tiny Tunes; if Android refuses, uninstall the old app first.
+Every push to `main` builds an APK (GitHub Actions) and attaches it to a new Release ("Tiny Tunes v2.N"): open the repo, then **Releases**, download `TinyTunes.apk` on the tablet and install it (allow "install unknown apps" once, and allow the microphone when the app asks; it asks on the home screen, before music time). It installs over the earlier Tiny Tunes; if Android refuses, uninstall the old app first.
 
 ## Run in a browser
 `python3 -m http.server 8000` and open http://localhost:8000. In a browser the tablet volume cannot be set by the app: set the media volume by hand to the step you marked.
