@@ -4,6 +4,8 @@ An Android app to start a young child on the basics of Indian classical singing 
 
 Version 3 is a complete restart.
 
+**[See the screens →](docs/screens/README.md)**
+
 ## How it works
 1. **Find Sa.** In Indian music anyone can choose Sa (the home note). On first start, he (or you) sings one long comfortable note, and the app makes that note Sa. Any octave counts, so a man, a woman and a child can all sing the same Sa.
 2. **Lessons** (13, one step at a time): Sa · Sa Sa Sa · Sa Re · Re Sa · Sa Re Sa · Sa Re Ma · Ma Re Sa · Sa Re Ga · Ga Re Sa · Sa Re Ga Ma Pa · Pa Ma Ga Re Sa · Sa to upper Sa · and back down.
