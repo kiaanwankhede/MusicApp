@@ -47,6 +47,6 @@ jobs:
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v2.${{ github.run_number }}
-          name: Tiny Tunes v2.${{ github.run_number }}
+          tag_name: v3.${{ github.run_number }}
+          name: Tiny Tunes v3.${{ github.run_number }}
           files: TinyTunes.apk
