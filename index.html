@@ -37,15 +37,17 @@ svg.ic{width:1.2em;height:1.2em;vertical-align:-0.2em}
 #hTop{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 #hTop h1{font-size:clamp(30px,4vw,46px);margin:0;font-weight:800;color:#3D4A8A;line-height:1}
 #hTop .sp{flex:1}
-#path{flex:1;display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(130px,14vw,170px),1fr));gap:clamp(10px,1.4vw,16px);align-content:start;overflow-y:auto;padding:6px 2px 10px}
-.ls{position:relative;border:0;border-radius:24px;background:#fff;box-shadow:0 5px 0 #E2D2B6;padding:10px 10px 8px;min-height:clamp(112px,16vh,140px);
+#path{flex:1;min-height:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-auto-rows:minmax(104px,1fr);gap:clamp(10px,1.4vw,16px);overflow-y:auto;padding:6px 2px 10px}
+@media (max-aspect-ratio:1/1){#path{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.ls{position:relative;border:0;border-radius:24px;background:#fff;box-shadow:0 5px 0 #E2D2B6;padding:10px 10px 8px;min-height:0;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--ink)}
 .ls:active{transform:translateY(3px);box-shadow:0 2px 0 #E2D2B6}
-.ls .num{position:absolute;left:10px;top:6px;font-weight:800;color:#B9AC96;font-size:15px}
+.ls .num{position:absolute;left:10px;top:4px;font-weight:800;color:#B9AC96;font-size:14px;line-height:1}
+.ls{padding-top:20px!important}
 .ls .dots{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}
-.ls .dots i{display:block;width:clamp(18px,2.2vw,24px);height:clamp(18px,2.2vw,24px);border-radius:50%}
-.ls .t{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:clamp(17px,1.9vw,21px);line-height:1.05;text-align:center}
-.ls .st{font-size:18px;letter-spacing:2px;color:#E2D5BE;line-height:1}
+.ls .dots i{display:block;width:clamp(20px,min(2.6vw,3.4vh),32px);height:clamp(20px,min(2.6vw,3.4vh),32px);border-radius:50%}
+.ls .t{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:clamp(17px,min(2.2vw,3.2vh),27px);line-height:1.05;text-align:center}
+.ls .st{font-size:clamp(18px,min(2.2vw,3vh),26px);letter-spacing:2px;color:#E2D5BE;line-height:1}
 .ls .st b{color:#F2B705;font-weight:400}
 .ls.cur{outline:4px solid #F2B705;animation:lsPulse 1.6s ease-in-out infinite}
 @keyframes lsPulse{50%{transform:translateY(-4px)}}
@@ -56,6 +58,8 @@ svg.ic{width:1.2em;height:1.2em;vertical-align:-0.2em}
 /* ---------- stage (lesson + free sing) ---------- */
 .top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;min-height:52px}
 .top .ttl{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:clamp(22px,2.8vw,32px);color:#3D4A8A;flex:1;min-width:120px;line-height:1.05}
+.hint4p{text-align:center;color:#8A8070;font-size:15px;line-height:1.3;min-height:1.3em;margin:-2px 0 6px}
+.ls.later{opacity:.6}
 #phrase{display:flex;justify-content:center;gap:clamp(8px,1.4vw,18px);flex-wrap:wrap;margin:8px 0 6px;min-height:clamp(70px,11vh,110px)}
 .bub{width:clamp(66px,9.5vh,104px);height:clamp(66px,9.5vh,104px);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;
   background:#fff;border:5px solid var(--c);color:var(--c);font-family:"Baloo 2",sans-serif;font-weight:800;font-size:clamp(22px,3.4vh,34px);line-height:1;
@@ -130,12 +134,12 @@ svg.ic{width:1.2em;height:1.2em;vertical-align:-0.2em}
     <div class="card" id="setMic">
       <h2>1 · Turn on the microphone</h2>
       <p>Tiny Tunes listens to his singing so it can show him which note he sang. Nothing is recorded or sent anywhere.</p>
-      <button class="btn pri" id="setMicBtn">Turn on microphone</button>
+      <div class="row"><button class="btn pri" id="setMicBtn">Turn on microphone</button><button class="btn sm" id="setMicSkip">Skip for now</button></div>
       <p class="msg" id="setMicMsg"></p>
     </div>
     <div class="card" id="setSa" hidden>
       <h2>2 · Find Sa</h2>
-      <p>Sa is the home note, and in Indian music anyone can choose it. Let him sing one long comfortable note (or a rhyme), or sing a long <b>Saaaa</b> yourself. When the note below stays steady, tap <b>Use this as Sa</b>.</p>
+      <p>Sa is the home note, and in Indian music anyone can choose it. Let him sing one long, comfortable note (not a rhyme), or sing a long <b>Saaaa</b> yourself. When the note below stays steady, tap <b>Use this as Sa</b>.</p>
       <div class="row" style="justify-content:space-between;align-items:flex-end">
         <div><div class="live" id="saLive">…</div><div class="mut small" id="saLive2">Listening…</div></div>
         <div style="flex:1;max-width:280px"><div class="meter"><i id="saMeter"></i></div><div class="mut small" style="margin-top:4px">hold the note steady</div></div>
@@ -145,7 +149,8 @@ svg.ic{width:1.2em;height:1.2em;vertical-align:-0.2em}
     </div>
     <div class="card" id="setVoice" hidden>
       <h2>3 · The singing voice</h2>
-      <p>The lessons are sung by a real man's voice (Sa, Re, Ma and Dha, from a free recording). For the other notes the app plays harmonium until someone records them.</p>
+      <p>The lessons are sung by a real man's voice (Sa, Re, Ma and Dha, from a free recording). Other notes play on harmonium until someone records a voice (a lesson uses the recorded voice once all its notes are recorded).</p>
+      <p><b>How to sit with him:</b> during <b>Listen</b>, hum along softly. During <b>Your turn</b>, stay quiet, point at the glowing circle and wait: the app can't tell your voice from his.</p>
       <p><b>Best:</b> record a family member's voice, yours or a grandparent's. You don't need to sing well: just say each note long, like <b>Saaa</b>, and the app tunes it to the right note. It takes about 2 minutes. Children love hearing a voice they know.</p>
       <div class="row"><button class="btn pri" id="setRec">Record a voice now</button><button class="btn" id="setDone">Later, start playing</button></div>
     </div>
@@ -175,6 +180,7 @@ svg.ic{width:1.2em;height:1.2em;vertical-align:-0.2em}
     <button class="btn sm" id="lNext">Next &rsaquo;</button>
   </div>
   <div id="phrase"></div>
+  <div class="hint4p" id="lHint"></div>
   <div class="stage" id="lStage">
     <canvas id="lCv"></canvas>
     <div class="pill" id="lPill"><svg><use href="#i-ear"/></svg><span>Listen</span></div>
@@ -229,6 +235,7 @@ svg.ic{width:1.2em;height:1.2em;vertical-align:-0.2em}
       <p>Volume of the app (keep it soft; he is sensitive to loud sounds).</p>
       <input type="range" id="gVol" min="10" max="100" step="5" style="width:100%">
       <div class="row" style="margin-top:8px"><span class="small">Tanpura (drone) while the voice sings:</span><div class="seg" id="gTp"></div></div>
+      <div class="row" style="margin-top:8px"><span class="small">Tablet volume limit during music (the tablet's volume is turned down to this if it is higher):</span><div class="seg" id="gCap"></div></div>
     </div>
     <div class="card">
       <h2>Microphone check</h2>
@@ -243,7 +250,7 @@ svg.ic{width:1.2em;height:1.2em;vertical-align:-0.2em}
     </div>
     <div class="card">
       <h2>About</h2>
-      <p class="small">Tiny Tunes 3.0. Everything stays on this tablet. Built-in voice: "Male singing Indian Sargam" by rachitgupta on Freesound (CC0, public domain). Harmonium and tanpura are made by the app. Not a medical product.</p>
+      <p class="small">Tiny Tunes 3. Everything stays on this tablet. Built-in voice: "Male singing Indian Sargam" by rachitgupta on Freesound (CC0, public domain). Harmonium and tanpura are made by the app. Not a medical product.</p>
     </div>
   </div>
 </section>
@@ -313,13 +320,16 @@ var CORE=(function(){
   function lp(x,sr,fc){var y=new Float32Array(x.length),a=Math.exp(-2*Math.PI*fc/sr),v=0;for(var i=0;i<x.length;i++){v=a*v+(1-a)*x[i];y[i]=v}return y}
   /* pitch track of a whole clip: 5 ms hop, 40 ms window */
   function track(x,sr){
-    var hop=Math.round(sr*0.005),win=Math.round(sr*0.04)&~1,out=[],fr=new Float32Array(win);
-    var gate=-1e9,peak=0,i,j;for(i=0;i<x.length;i++){var a=Math.abs(x[i]);if(a>peak)peak=a}
+    /* recordings at 44.1/48 kHz are analysed at half rate with a 10 ms hop: about 8x less work, so a tablet does not freeze */
+    var dec=sr>30000?2:1,xs=x,s2=sr,i,j;
+    if(dec===2){var nn=x.length>>1;xs=new Float32Array(nn);for(i=0;i<nn;i++){var k2=2*i;xs[i]=0.25*(k2>0?x[k2-1]:x[k2])+0.5*x[k2]+0.25*(k2+1<x.length?x[k2+1]:x[k2])}s2=sr/2}
+    var hop=Math.round(s2*0.01),win=Math.round(s2*0.04)&~1,out=[],fr=new Float32Array(win);
+    var gate=-1e9,peak=0;for(i=0;i<xs.length;i++){var a=Math.abs(xs[i]);if(a>peak)peak=a}
     gate=20*Math.log10(peak+1e-9)-30;
-    for(i=0;i+win<=x.length;i+=hop){
-      var s=0;for(j=0;j<win;j++){fr[j]=x[i+j];s+=fr[j]*fr[j]}var db=10*Math.log10(s/win+1e-12);
-      var r=db>gate?yin(fr,sr,65,1100):null;
-      out.push({t:i+win/2,f:r&&r.c>0.7?r.f:0,db:db});
+    for(i=0;i+win<=xs.length;i+=hop){
+      var s=0;for(j=0;j<win;j++){fr[j]=xs[i+j];s+=fr[j]*fr[j]}var db=10*Math.log10(s/win+1e-12);
+      var r=db>gate?yin(fr,s2,65,1100):null;
+      out.push({t:(i+win/2)*dec,f:r&&r.c>0.7?r.f:0,db:db});
     }
     for(i=2;i<out.length-2;i++){if(!out[i].f)continue;var nb=[out[i-2].f,out[i-1].f,out[i].f,out[i+1].f,out[i+2].f].filter(Boolean).sort(function(a,b){return a-b});
       if(nb.length>=3){var m=nb[nb.length>>1];if(Math.abs(1200*Math.log2(out[i].f/m))>500)out[i].f2=m}}
@@ -331,7 +341,7 @@ var CORE=(function(){
     var best=null,cur=null,gap=0;
     for(var i=0;i<tr.length;i++){
       if(tr[i].f){if(!cur)cur={a:i,b:i};cur.b=i;gap=0}
-      else if(cur){gap++;if(gap>4){if(!best||cur.b-cur.a>best.b-best.a)best=cur;cur=null;gap=0}}
+      else if(cur){gap++;if(gap>3){if(!best||cur.b-cur.a>best.b-best.a)best=cur;cur=null;gap=0}}
     }
     if(cur&&(!best||cur.b-cur.a>best.b-best.a))best=cur;
     return best;
@@ -405,13 +415,13 @@ function load(k,d){try{var v=JSON.parse(localStorage.getItem(k));return v&&typeo
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 function clamp(x,a,b){return x<a?a:x>b?b:x}
 function ease(c,t,dt,tau){return c+(t-c)*(1-Math.exp(-dt/Math.max(0.001,tau)))}
-var S=load("tt3",{saPc:2,tol:75,vol:60,tp:true,setup:false,stars:{},who:"low",micOK:false});
+var S=load("tt3",{saPc:2,tol:75,vol:60,tp:true,setup:false,stars:{},who:"low",micOK:false,volCap:60});
 if(!S.stars||typeof S.stars!=="object")S.stars={};
 function saveS(){save("tt3",S)}
 
 /* ---------- notes, Sa, lessons ---------- */
 var NOTES=[{s:0,n:"Sa",d:"सा",c:"#E5484D"},{s:2,n:"Re",d:"रे",c:"#F28A3C"},{s:4,n:"Ga",d:"ग",c:"#E0B020"},{s:5,n:"Ma",d:"म",c:"#4DB868"},
-  {s:7,n:"Pa",d:"प",c:"#2FA6CB"},{s:9,n:"Dha",d:"ध",c:"#4F72DB"},{s:11,n:"Ni",d:"नि",c:"#9160D3"},{s:12,n:"Sa'",d:"सां",c:"#E8508A"}];
+  {s:7,n:"Pa",d:"प",c:"#2FA6CB"},{s:9,n:"Dha",d:"ध",c:"#4F72DB"},{s:11,n:"Ni",d:"नि",c:"#9160D3"},{s:12,n:"Sa'",d:"सां",c:"#E5484D"}];
 function NB(semi){for(var i=0;i<NOTES.length;i++)if(NOTES[i].s===semi)return NOTES[i];return NOTES[0]}
 function NI(semi){for(var i=0;i<NOTES.length;i++)if(NOTES[i].s===semi)return i;return 0}
 var KEYN=["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"];
@@ -444,7 +454,9 @@ function audio(){
   if(ctx.state==="suspended")ctx.resume().catch(noop);return ctx}
 document.addEventListener("pointerdown",function(){try{audio()}catch(e){}},{capture:true,passive:true});
 function setVol(){if(master)master.gain.setTargetAtTime(S.vol/100*0.9,ctx.currentTime,0.1)}
-function latMs(){return ctx&&ctx.outputLatency?ctx.outputLatency*1000:60}
+/* how late the speaker plays what the app schedules (Bluetooth can be 0.2-0.3 s); never assume less than 80 ms */
+var btOut=false;
+function latMs(){if(!ctx)return 80;var l=((ctx.outputLatency||0)+(ctx.baseLatency||0))*1000;return Math.max(80,Math.min(400,l||0))+(btOut?350:0)}
 function quietFor(ms){ignoreUntil=Math.max(ignoreUntil,performance.now()+ms+latMs()+300)}
 var HW=null;function harmWave(){if(!HW){var n=20,re=new Float32Array(n),im=new Float32Array(n);for(var i=1;i<n;i++)im[i]=(1/Math.pow(i,0.85))*(i%2?1:0.62)*(i>9?0.6:1);HW=ctx.createPeriodicWave(re,im)}return HW}
 function harmNote(f,t0,dur,lvl){
@@ -453,11 +465,12 @@ function harmNote(f,t0,dur,lvl){
   var os=[-0.8,0.8].map(function(d){var o=ctx.createOscillator();o.setPeriodicWave(harmWave());o.frequency.value=f+d;o.connect(lp);o.start(t0);o.stop(t0+dur+0.05);return o});
   active.push({g:g,s:os,end:t0+dur});return t0+dur}
 function pcmBuf(x,sr){var b=ctx.createBuffer(1,x.length,sr);b.getChannelData(0).set(x);return b}
-function playBuf(b,t0,lvl){var s=ctx.createBufferSource();s.buffer=b;var g=ctx.createGain();g.gain.value=lvl;s.connect(g);g.connect(bus);s.start(t0);active.push({g:g,s:[s],end:t0+b.duration});return t0+b.duration}
+function prune(){var t=ctx.currentTime;if(active.length>40)active=active.filter(function(a){return a.end>t-0.5})}
+function playBuf(b,t0,lvl){prune();var s=ctx.createBufferSource();s.buffer=b;var g=ctx.createGain();g.gain.value=lvl;s.connect(g);g.connect(bus);s.start(t0);active.push({g:g,s:[s],end:t0+b.duration});return t0+b.duration}
 function stopAll(fade){
   if(!ctx)return;var t=ctx.currentTime;fade=fade||0.25;
   active.forEach(function(a){if(a.end<=t)return;try{a.g.gain.cancelScheduledValues(t);a.g.gain.setValueAtTime(a.g.gain.value,t);a.g.gain.linearRampToValueAtTime(0,t+fade);a.s.forEach(function(s){try{s.stop(t+fade+0.05)}catch(e){}})}catch(e){}});
-  active=[];tpOff(fade);quietFor(fade*1000);
+  active=[];clearTimeout(hearT);hearT=null;tpOff(fade);quietFor(fade*1000);
 }
 /* tanpura (made by the app) */
 function makeString(A,f,dur){
@@ -484,9 +497,10 @@ function tpSched(horizon){
     var g=ctx.createGain();g.gain.value=(k===3?0.85:(k===0?0.7:0.65))*(0.92+Math.random()*0.16);src.connect(g);g.connect(tpBus);src.start(TP.st.next);
     TP.st.next+=(k===3?1.35:1.2)+(Math.random()-0.5)*0.04;TP.st.idx++}
 }
-function tpPrep(){audio();var f=childSa();if(!TP.bufs||TP.forHz!==f){TP.bufs=[makeString(ctx,f*0.75,4.6),makeString(ctx,f,4.6),makeString(ctx,f/2,4.8)];TP.forHz=f}}
+var TPC={};
+function tpPrep(){audio();var f=childSa();if(!TP.bufs||TP.forHz!==f){if(!TPC[f])TPC[f]=[makeString(ctx,f*0.75,4.6),makeString(ctx,f,4.6),makeString(ctx,f/2,4.8)];TP.bufs=TPC[f];TP.forHz=f}}
 function tpOn(level,fade){
-  tpPrep();clearTimeout(TP.stopT);var t=ctx.currentTime,g=tpBus.gain;g.cancelScheduledValues(t);g.setValueAtTime(g.value,t);g.linearRampToValueAtTime(level,t+(fade||1.5));
+  tpPrep();clearTimeout(TP.stopT);if(typeof hearT!=="undefined"&&hearT&&screen!=="home"){clearTimeout(hearT);hearT=null}var t=ctx.currentTime,g=tpBus.gain;g.cancelScheduledValues(t);g.setValueAtTime(g.value,t);g.linearRampToValueAtTime(level,t+(fade||1.5));
   if(!TP.timer){TP.st={next:t+0.05,idx:0};tpSched(t+1);TP.timer=setInterval(function(){tpSched(ctx.currentTime+1)},200)}TP.on=true;ev("sound",{kind:"tanpura",level:level});
 }
 function tpOff(fade){
@@ -494,52 +508,66 @@ function tpOff(fade){
   TP.on=false;quietFor(fade*1000);clearTimeout(TP.stopT);TP.stopT=setTimeout(function(){if(!TP.on){clearInterval(TP.timer);TP.timer=null}},fade*1000+400);
 }
 
+/* ---------- tablet volume limit: while music plays, the tablet's media volume is kept at or below the limit ---------- */
+function nat(method,opts){try{var C=window.Capacitor;if(C&&C.isNativePlatform&&C.isNativePlatform()&&C.nativePromise)return C.nativePromise("TinyTunes",method,opts||{})}catch(e){}return Promise.reject(new Error("no-native"))}
+var capIv=null;
+function volCheck(){nat("info").then(function(i){if(!i)return;btOut=!!i.bluetooth;if(S.volCap>=100||!i.max)return;var cap=Math.max(1,Math.round(i.max*S.volCap/100));if(i.level>cap){ev("volcap",{from:i.level,to:cap});return nat("setVolume",{level:cap})}}).catch(noop)}
+function volCapOn(){volCheck();if(!capIv)capIv=setInterval(volCheck,700)}
+function volCapOff(){if(capIv){clearInterval(capIv);capIv=null}}
+
 /* ---------- the singing voice: built-in man's voice + a voice recorded in the app, tuned by CORE.render ---------- */
 var VB={},VR={},vrVer=0;
 function decodeB64(b64){var bin=atob(b64),n=bin.length>>1,x=new Float32Array(n);for(var i=0;i<n;i++){var v=bin.charCodeAt(2*i)|(bin.charCodeAt(2*i+1)<<8);if(v>=32768)v-=65536;x[i]=v/32768}return x}
-function initBuiltin(){try{var V=VOICE_BUILTIN;Object.keys(V.clips).forEach(function(k){var x=decodeB64(V.clips[k]),an=CORE.analyse(x,V.sr);if(an)VB[k]={x:x,sr:V.sr,an:an}})}catch(e){}}
+function initBuiltin(){try{var V=VOICE_BUILTIN;Object.keys(V.clips).forEach(function(k){VB[k]={b64:V.clips[k],sr:V.sr,an:null}})}catch(e){}}
+/* a clip's samples and analysis are prepared the first time a lesson needs it */
+function prep(c){if(!c.x)c.x=decodeB64(c.b64);if(!c.an)c.an=CORE.analyse(c.x,c.sr);if(c.an&&!c.f0)c.f0=c.an.f0;return c}
 function nKeys(o){return Object.keys(o).length}
 function setHas(set,semi){return!!(set[semi]||(semi===12&&set[0]))}
 function phraseSet(notes){
   if(nKeys(VR)&&notes.every(function(s){return setHas(VR,s)}))return VR;
   if(notes.every(function(s){return setHas(VB,s)}))return VB;return null}
-function singerK(set){var ks=Object.keys(set).map(function(k){return Math.log2(set[k].an.f0/(saBase()*Math.pow(2,(+k)/12)))}).sort(function(a,b){return a-b});return Math.round(ks[ks.length>>1]||0)}
+function singerK(set){var ks=Object.keys(set).map(function(k){var c=set[k],f0=c.f0||(prep(c).an?c.f0:0);return f0?Math.log2(f0/(saBase()*Math.pow(2,(+k)/12))):null}).filter(function(v){return v!=null}).sort(function(a,b){return a-b});return Math.round(ks[ks.length>>1]||0)}
 var rcache={};
 function voiceBuf(set,semi,dur){
   var key=(set===VR?"r"+vrVer:"b")+"|"+semi+"|"+dur.toFixed(2)+"|"+S.saPc;if(rcache[key])return rcache[key];
-  var c=set[semi]||(semi===12?set[0]:null),f=saBase()*Math.pow(2,singerK(set)+semi/12);
-  var y=CORE.render(c.x,c.sr,c.an,f,dur,{keep:0.5,rms:0.12});return(rcache[key]=pcmBuf(y,c.sr));
+  var c=set[semi]||(semi===12?set[0]:null);prep(c);if(!c.an)return null;var f=saBase()*Math.pow(2,singerK(set)+semi/12);
+  var y=CORE.render(c.x,c.sr,c.an,f,dur,{keep:set===VR?0.1:0.5,rms:0.12});return(rcache[key]=pcmBuf(y,c.sr));
 }
 /* sing a phrase: real voice when every note has a clip, otherwise harmonium */
 function sing(notes,beats,o){
   audio();o=o||{};var set=o.harm?null:phraseSet(notes),t=ctx.currentTime+(o.lead||0.15),times=[],lvl=o.lvl||1;
   notes.forEach(function(s,i){var d=beats[i];times.push(t);
-    if(set)playBuf(voiceBuf(set,s,d+0.06),t,0.95*lvl);else harmNote(childSa()*Math.pow(2,s/12),t,d,0.2*lvl);t+=d});
+    var vb=set?voiceBuf(set,s,d+0.06):null;if(vb)playBuf(vb,t,0.95*lvl);else harmNote(childSa()*Math.pow(2,s/12),t,d,0.2*lvl);t+=d});
   quietFor((t-ctx.currentTime)*1000);ev("sound",{kind:set?"voice":"harmonium",notes:notes.slice(),src:set===VR?"recorded":(set?"builtin":"")});
   return{times:times,end:t,voice:!!set};
 }
+var hearT=null;
 function hearSa(){
-  audio();stopAll(0.2);var t=ctx.currentTime;tpOn(0.35,1.5);
-  var set=phraseSet([0]);if(set)playBuf(voiceBuf(set,0,2.4),t+1.0,0.95);else harmNote(childSa(),t+1.0,2.6,0.2);
-  setTimeout(function(){tpOff(2)},4200);quietFor(6500);ev("hearsa",{voice:!!set});
+  audio();stopAll(0.2);volCapOn();setTimeout(function(){if(screen!=="lesson"&&screen!=="free")volCapOff()},7000);var t=ctx.currentTime;if(S.tp)tpOn(0.35,1.5);
+  var set=phraseSet([0]),vb=set?voiceBuf(set,0,2.4):null;if(vb)playBuf(vb,t+1.0,0.95);else harmNote(childSa(),t+1.0,2.6,0.2);
+  clearTimeout(hearT);hearT=setTimeout(function(){hearT=null;tpOff(2)},4200);quietFor(6500);ev("hearsa",{voice:!!set});
 }
 
 /* ---------- microphone + note tracker ---------- */
-var micStream=null,an=null,tbuf=null,proc=null,micState="off",micP=null,cap=[],capOn=false,capSr=48000,CAPMAX=260;
+var micStream=null,an=null,tbuf=null,proc=null,micSrc=null,micZ=null,micWant=false,micState="off",micP=null,cap=[],capOn=false,capSr=48000,CAPMAX=480,vMarks=[];
 function micStart(){
-  if(an)return Promise.resolve(true);if(micP)return micP;
+  micWant=true;if(an)return Promise.resolve(true);if(micP)return micP;
   if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){micState="none";return Promise.resolve(false)}
   audio();
   micP=navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:true}}).then(function(st){
-    micP=null;micStream=st;var src=ctx.createMediaStreamSource(st),z=ctx.createGain();z.gain.value=0;z.connect(ctx.destination);
+    micP=null;
+    /* the app went to the background (or stopped listening) while Android was still asking: let go of the mic at once */
+    if(!micWant||document.hidden){st.getTracks().forEach(function(t){t.stop()});return false}
+    micStream=st;var src=micSrc=ctx.createMediaStreamSource(st),z=micZ=ctx.createGain();z.gain.value=0;z.connect(ctx.destination);
     an=ctx.createAnalyser();an.fftSize=2048;tbuf=new Float32Array(2048);src.connect(an);an.connect(z);
     proc=ctx.createScriptProcessor(4096,1,1);src.connect(proc);proc.connect(z);capSr=ctx.sampleRate;
-    proc.onaudioprocess=function(e){if(capOn){cap.push(new Float32Array(e.inputBuffer.getChannelData(0)));if(cap.length>CAPMAX)cap.shift()}};
+    proc.onaudioprocess=function(e){if(capOn&&!(capOn==="him"&&performance.now()<ignoreUntil)){cap.push({d:new Float32Array(e.inputBuffer.getChannelData(0)),t:performance.now()});if(cap.length>CAPMAX)cap.shift()}};
     micState="on";if(!S.micOK){S.micOK=true;saveS()}ev("mic",{on:true});return true;
   }).catch(function(e){micP=null;var nm=e&&e.name;micState=(nm==="NotAllowedError"||nm==="SecurityError")?"denied":"error";ev("mic",{on:false,err:nm});return false});
   return micP;
 }
-function micStop(){if(micStream){micStream.getTracks().forEach(function(t){t.stop()});micStream=null}if(proc){try{proc.disconnect()}catch(e){}proc=null}an=null;if(micState==="on")micState="off"}
+function micStop(){micWant=false;if(micStream){micStream.getTracks().forEach(function(t){t.stop()});micStream=null}
+  [proc,an,micSrc,micZ].forEach(function(n){if(n)try{n.disconnect()}catch(e){}});proc=null;an=null;micSrc=null;micZ=null;if(micState==="on")micState="off"}
 var tracker=new CORE.Tracker(),cur={voiced:false,db:-100},screen="";
 var lastT=0;
 function loop(now){
@@ -547,7 +575,7 @@ function loop(now){
   var r={voiced:false,db:-100};
   if(an){an.getFloatTimeDomainData(tbuf);r=tracker.push(tbuf,ctx.sampleRate,dt)}
   if(now<ignoreUntil)r={voiced:false,db:r.db,ignored:true};
-  cur=r;
+  cur=r;if(capOn==="him"&&r.voiced)vMarks.push(now);   /* moments when he was heard: his playback is built only from these */
   if(screen==="lesson")lessonFrame(r,dt,now);else if(screen==="free")freeFrame(r,dt,now);
   else if(screen==="setup")setupFrame(r,dt,now);else if(screen==="grown")grownFrame(r,dt,now);
 }
@@ -567,7 +595,10 @@ Stage.prototype.voice=function(r,dt,now){
     else if(this.target===12&&p<150)best=p+1200;else if(p>1140)best=p-1200;
     this.c=prev==null?best:ease(this.c,best,dt,0.06);this.on=true;this.lastOn=now;
     var k=-1,kd=1e9;for(var i=0;i<8;i++){var dd=Math.abs(this.c-NOTES[i].s*100);if(dd<kd){kd=dd;k=i}}
-    if(kd<=Math.max(55,S.tol)){this.lit[k]=Math.max(this.lit[k],0.9);this.setName(k,now)}
+    /* when his note counts for the wanted note, show that note's name and colour */
+    if(this.target>=0&&Math.abs(CORE.centsTo(r.f,saBase(),this.target%12))<=S.tol){k=NI(this.target);kd=0}
+    this.kk=kd<=Math.max(55,S.tol)?k:-1;
+    if(this.kk>=0){this.lit[k]=Math.max(this.lit[k],0.9);this.setName(k,now)}
   }else if(this.on&&now-(this.lastOn||0)>160)this.on=false;
   this.vis=ease(this.vis,this.on?1:0,dt,this.on?0.06:0.3);
 };
@@ -595,7 +626,7 @@ Stage.prototype.draw=function(dt,now){
   }
   var bx=W*0.34,shift=Math.max(80,W*0.14)*dt;this.trail.forEach(function(p){p.x-=shift});
   while(this.trail.length&&(this.trail[0].x<-20||now-this.trail[0].t>4000))this.trail.shift();
-  var by=this.y(this.c),k=-1,kd=1e9;for(i=0;i<8;i++){var dd=Math.abs(this.c-NOTES[i].s*100);if(dd<kd){kd=dd;k=i}}var col=kd<=70?NOTES[k].c:"#FFFFFF";
+  var by=this.y(this.c),col=this.kk>=0?NOTES[this.kk].c:"#FFFFFF";
   if(this.on){var pv=this.trail[this.trail.length-1];this.trail.push({x:bx,y:by,c:col,t:now,brk:!pv||now-pv.t>130})}
   x.lineCap="round";
   for(i=1;i<this.trail.length;i++){var p0=this.trail[i-1],p1=this.trail[i];if(p1.brk)continue;a=Math.max(0,1-(now-p1.t)/4000);x.globalAlpha=0.6*a;x.strokeStyle=p1.c;x.lineWidth=12*a+3;x.beginPath();x.moveTo(p0.x,p0.y);x.lineTo(p1.x,p1.y);x.stroke()}
@@ -615,10 +646,12 @@ function killTok(k){if(k){k.dead=true;k.ids.forEach(clearTimeout)}}
 /* ---------- screens ---------- */
 function show(id){
   if(screen==="lesson"&&id!=="lesson")lessonLeave();
+  if(screen==="rec"&&id!=="rec")recCancel();
   if(screen&&screen!==id&&id!=="rec")stopAll(0.3);
   screen=id;document.querySelectorAll(".screen").forEach(function(s){s.classList.toggle("on",s.id===id)});
   if(id==="home")drawHome();if(id==="grown")drawGrown();if(id==="rec")drawRec();
   if(id==="free"||id==="lesson"||id==="setup"||id==="grown")if(S.micOK||micState==="on")micStart();
+  if(id==="free"||id==="lesson")volCapOn();else volCapOff();
   ev("screen",{id:id});
 }
 function holdBtn(el,ms,cb){var fill=el.querySelector(".fill"),t=null;
@@ -627,12 +660,12 @@ function holdBtn(el,ms,cb){var fill=el.querySelector(".fill"),t=null;
   el.addEventListener("pointerdown",down);["pointerup","pointerleave","pointercancel"].forEach(function(n){el.addEventListener(n,up)});el.addEventListener("contextmenu",function(e){e.preventDefault()})}
 
 /* ---------- home ---------- */
-function curLesson(){for(var i=0;i<LESSONS.length;i++)if(!(S.stars[i]>0))return i;return LESSONS.length-1}
+function curLesson(){for(var i=0;i<LESSONS.length;i++)if(!((S.stars[i]||0)>=2))return i;return LESSONS.length-1}
 function drawHome(){
   var p=$("path"),c=curLesson(),h="";
   LESSONS.forEach(function(L,i){var st=S.stars[i]||0,dots=L.n.map(function(s){return'<i style="background:'+NB(s).c+'"></i>'}).join("");
     var voice=!!phraseSet(L.n);
-    h+='<button class="ls'+(i===c?" cur":"")+'" data-i="'+i+'"><span class="num">'+(i+1)+'</span>'+(voice?'<svg class="vtag" aria-label="real voice"><use href="#i-voice"/></svg>':"")+
+    h+='<button class="ls'+(i===c?" cur":"")+(i>c?" later":"")+'" data-i="'+i+'"><span class="num">'+(i+1)+'</span>'+(voice?'<svg class="vtag" aria-label="real voice"><use href="#i-voice"/></svg>':"")+
       '<span class="dots">'+dots+'</span><span class="t">'+L.t+'</span><span class="st">'+"<b>★</b>".repeat(st)+"★".repeat(3-st)+"</span></button>"});
   p.innerHTML=h;p.querySelectorAll(".ls").forEach(function(b){b.onclick=function(){lessonOpen(+b.dataset.i)}});
   $("hGoT").textContent="Start lesson "+(c+1);
@@ -650,67 +683,96 @@ function lessonOpen(i){
   var L=LESSONS[i];Ls={idx:i,L:L,phase:"",i:0,hold:0,gap:1,needBreak:false,prompts:0,since:0,hits:0,miss:0,tok:newTok(),him:null};
   $("lTitle").textContent=(i+1)+" · "+L.t;
   $("phrase").innerHTML=L.n.map(function(s){var nb=NB(s);return'<div class="bub" style="--c:'+nb.c+'">'+nb.n+"<small>"+nb.d+"</small></div>"}).join("");
-  $("done").hidden=true;show("lesson");stageL.target=-1;stageL.holdFrac=0;
+  $("done").hidden=true;$("lNext").hidden=i>=LESSONS.length-1;show("lesson");stageL.target=-1;stageL.holdFrac=0;
   audio();if(S.tp)try{tpPrep()}catch(e){}
   micStart();Ls.tok.at(500,lessonListen);ev("lesson",{i:i});
 }
 function bubs(){return $("phrase").children}
 function bubSet(i,cls){var b=bubs();for(var j=0;j<b.length;j++)b[j].classList.toggle(cls,j===i)}
-function setPill(m){var p=$("lPill");p.classList.toggle("turn",m==="turn");p.hidden=m==="done";
-  p.innerHTML=m==="turn"?'<svg><use href="#i-mic"/></svg><span>Your turn</span>':'<svg><use href="#i-ear"/></svg><span>Listen</span>'}
+var HINT={listen:"Listen together. You can hum along softly.",turn:"Now stay quiet, point at the glowing circle and wait. (Your own voice would count as his.)",
+  done:"Do each lesson 2 or 3 times, then go to the next one.",ending:""};
+function setPill(m){var p=$("lPill");p.classList.toggle("turn",m==="turn");p.hidden=m==="done"||m==="ending";
+  p.innerHTML=m==="turn"?'<svg><use href="#i-mic"/></svg><span>Your turn</span>':'<svg><use href="#i-ear"/></svg><span>Listen</span>';
+  if(HINT[m]!=null)$("lHint").textContent=HINT[m]}
 function lessonListen(){
   var s=Ls;if(!s)return;killTok(s.tok);s.tok=newTok();capOn=false;s.phase="listen";setPill("listen");stageL.target=-1;stageL.holdFrac=0;$("done").hidden=true;
   var b=bubs();for(var j=0;j<b.length;j++)b[j].className="bub";
   var lead=0.3;if(S.tp){tpOn(0.3,1.2);lead=1.3}
   var p=sing(s.L.n,beatsOf(s.L),{lead:lead}),t0=ctx.currentTime;
   p.times.forEach(function(t,i){s.tok.at((t-t0)*1000,function(){bubSet(i,"sing");stageL.flash(s.L.n[i])})});
-  s.tok.at((p.end-t0)*1000+80,function(){bubSet(-1,"sing");var w=250;if(S.tp){tpOff(0.9);w=1000}s.tok.at(w,lessonTurn)});
+  if(S.tp){var lastD=beatsOf(s.L)[s.L.n.length-1],fd=Math.max(0.5,Math.min(1.0,lastD));s.tok.at((p.end-fd-t0)*1000,function(){tpOff(fd)})}
+  s.tok.at((p.end-t0)*1000+50,function(){bubSet(-1,"sing");lessonTurn()});
   ev("listen",{lesson:s.idx,voice:p.voice});
 }
 function lessonTurn(){
-  var s=Ls;if(!s)return;s.phase="turn";s.i=0;s.hold=0;s.gap=1;s.needBreak=false;s.prompts=0;s.since=performance.now();s.hits=0;s.miss=0;
-  cap=[];capOn=true;setPill("turn");bubSet(0,"want");stageL.target=s.L.n[0];ev("turn",{lesson:s.idx});
+  var s=Ls;if(!s)return;s.phase="turn";s.i=0;s.hold=0;s.gap=1;s.needBreak=false;s.remodels=0;s.since=performance.now();s.hits=0;s.miss=0;s.lastHit=0;s.lastV=0;
+  cap=[];vMarks=[];capOn="him";s.voicedAny=false;setPill("turn");bubSet(0,"want");stageL.target=s.L.n[0];ev("turn",{lesson:s.idx});
   if(micState!=="on")$("lPill").innerHTML='<svg><use href="#i-mic"/></svg><span>Mic is off: Grown-ups → Microphone</span>';
 }
 function lessonFrame(r,dt,now){
   stageL.voice(r,dt,now);stageL.draw(dt,now);var s=Ls;if(!s||s.phase!=="turn")return;
   var semi=s.L.n[s.i],need=s.L.hold||0.25,onIt=false;
-  if(!r.voiced){s.gap+=dt;if(s.gap>0.12)s.needBreak=false;s.hold=Math.max(0,s.hold-dt*0.6)}
-  else{s.gap=0;s.since=Math.max(s.since,now-4000);var d=CORE.centsTo(r.f,saBase(),semi%12);
-    if(Math.abs(d)<=S.tol&&!s.needBreak){onIt=true;s.hold+=dt;if(s.hold>=need){lessonHit(now);return}}else s.hold=Math.max(0,s.hold-dt*0.5)}
+  if(!r.voiced){s.gap+=dt;if(s.gap>0.08)s.needBreak=false;s.hold=Math.max(0,s.hold-dt*0.6)}
+  else{s.gap=0;s.voicedAny=true;s.lastV=now;var d=CORE.centsTo(r.f,saBase(),semi%12);
+    if(Math.abs(d)<=S.tol&&!s.needBreak){onIt=true;s.since=Math.max(s.since,now-3000);s.hold+=dt;if(s.hold>=need){lessonHit(now);return}}else s.hold=Math.max(0,s.hold-dt*0.5)}
   stageL.holdFrac=onIt?s.hold/need:0;   /* the gold ring only while he is on the note */
-  if(now-s.since>8000){if(s.prompts<2){s.prompts++;promptNote(semi,now)}else lessonNextNote(false,now)}
+  /* no progress: the voice sings the whole phrase again at his next little pause. The phrase has to come in one go:
+     if the next note does not follow within 3 s, it starts again. */
+  var waited=now-s.since,gapHit=s.i>0?now-s.lastHit:0,paused=now-(s.lastV||0)>400;
+  if((waited>(s.remodels?6000:5000)||gapHit>3000)&&(paused||waited>15000||gapHit>8000))resing(now);
 }
-function promptNote(semi,now){var s=Ls;var p=sing([semi],[1.1]);s.since=now+(p.end-ctx.currentTime)*1000;stageL.flash(semi,now);ev("prompt",{semi:semi})}
-function lessonHit(now){var s=Ls;s.hits++;var b=bubs()[s.i];b.classList.remove("want");b.classList.add("got");stageL.burst(s.L.n[s.i],22);stageL.holdFrac=0;ev("hit",{i:s.i,semi:s.L.n[s.i]});lessonNextNote(true,now)}
-function lessonNextNote(hit,now){
-  var s=Ls;if(!hit){var b=bubs()[s.i];b.classList.remove("want");b.classList.add("miss");s.miss++;ev("skip",{i:s.i})}
-  var prev=s.L.n[s.i];s.i++;s.hold=0;s.prompts=0;s.since=now;
-  if(s.i>=s.L.n.length){lessonEnd();return}
+function resing(now){
+  var s=Ls;if(s.remodels>=2){finishTurn(false);return}
+  s.remodels++;s.i=0;s.hits=0;s.hold=0;s.needBreak=false;s.lastHit=0;stageL.target=-1;stageL.holdFrac=0;
+  var b=bubs();for(var j=0;j<b.length;j++)b[j].className="bub";
+  var p=sing(s.L.n,beatsOf(s.L)),t0=ctx.currentTime;s.since=now+(p.end-t0)*1000;
+  p.times.forEach(function(t,i){s.tok.at((t-t0)*1000,function(){bubSet(i,"sing");stageL.flash(s.L.n[i])})});
+  s.tok.at((p.end-t0)*1000,function(){bubSet(-1,"sing");if(Ls===s&&s.phase==="turn"){bubSet(0,"want");stageL.target=s.L.n[0]}});
+  ev("prompt",{phrase:true,n:s.remodels});
+}
+function lessonHit(now){
+  var s=Ls;s.hits++;s.lastHit=now;s.since=now;var b=bubs()[s.i];b.classList.remove("want");b.classList.add("got");stageL.burst(s.L.n[s.i],22);stageL.holdFrac=0;ev("hit",{i:s.i,semi:s.L.n[s.i]});
+  var prev=s.L.n[s.i];s.i++;s.hold=0;
+  if(s.i>=s.L.n.length){finishTurn(true);return}
   s.needBreak=(s.L.n[s.i]%12===prev%12);bubSet(s.i,"want");stageL.target=s.L.n[s.i];
 }
+/* end of his turn: keep listening 1.2 s so his last note is in the playback; then the voice sings Sa (home) if the phrase ended elsewhere */
+function finishTurn(won){
+  var s=Ls;if(!s||s.phase!=="turn")return;s.phase="ending";setPill("ending");stageL.target=-1;stageL.holdFrac=0;
+  if(!won){var b=bubs();for(var j=0;j<b.length;j++)if(!b[j].classList.contains("got")){b[j].classList.remove("want");b[j].classList.add("miss")}}
+  if(!s.voicedAny)ev("silent",{});
+  s.tok.at(won?1200:200,function(){
+    var home=won&&s.L.n[s.L.n.length-1]%12!==0;
+    if(home){var t0=ctx.currentTime,p=sing([0],[1.4],{lead:0.1});stageL.flash(0);s.tok.at((p.end-t0)*1000+150,function(){lessonEnd(won)})}else lessonEnd(won);
+  });
+}
 function himTake(){
-  var n=0;cap.forEach(function(c){n+=c.length});if(!n)return null;var x=new Float32Array(n),o=0;cap.forEach(function(c){x.set(c,o);o+=c.length});
-  var sr=capSr,hop=Math.round(sr*0.02),db=[],mx=-200,i,j;
-  for(i=0;i+hop<=x.length;i+=hop){var s=0;for(j=0;j<hop;j++)s+=x[i+j]*x[i+j];var d=10*Math.log10(s/hop+1e-12);db.push(d);if(d>mx)mx=d}
-  var th=mx-24,a=-1,b=-1;for(i=0;i<db.length;i++)if(db[i]>th){if(a<0)a=i;b=i}
-  if(a<0||mx<-55)return null;
-  var s0=Math.max(0,(a-8)*hop),s1=Math.min(x.length,(b+10)*hop);if(s1-s0>sr*8)s0=s1-sr*8;
-  var y=x.slice(s0,s1),e=0;for(i=0;i<y.length;i++)e+=y[i]*y[i];var g=0.12/Math.sqrt(e/y.length+1e-12),pk=0;for(i=0;i<y.length;i++){var v=Math.abs(y[i]*g);if(v>pk)pk=v}if(pk>0.9)g*=0.9/pk;
-  var f=Math.round(sr*0.02);for(i=0;i<y.length;i++){var w=1;if(i<f)w=i/f;if(y.length-1-i<f)w=(y.length-1-i)/f;y[i]*=g*w}
+  if(!cap.length||!vMarks.length)return null;
+  var sr=capSr,cd=cap[0].d.length/sr*1000;
+  var keep=cap.map(function(c){var a=c.t-cd-250,b=c.t+250;for(var j=0;j<vMarks.length;j++){var v=vMarks[j];if(v>=a&&v<=b)return true}return false});
+  if(keep.filter(Boolean).length*cd<500)return null;                       /* less than half a second of him: nothing to play */
+  var use=keep.map(function(k,i){return k||!!keep[i-1]||!!keep[i+1]}),parts=[],curp=null;
+  use.forEach(function(u,i){if(u){if(!curp){curp=[];parts.push(curp)}curp.push(cap[i].d)}else curp=null});
+  var segs=parts.map(function(p){var L=0;p.forEach(function(d){L+=d.length});var y=new Float32Array(L),o=0;p.forEach(function(d){y.set(d,o);o+=d.length});return y});
+  var max=sr*8,total=0;segs.forEach(function(y){total+=y.length});while(total>max&&segs.length>1){total-=segs[0].length;segs.shift()}
+  var y=new Float32Array(Math.min(total,max)),o=0,f=Math.round(sr*0.012),i;
+  segs.forEach(function(sg){var s0=Math.max(0,sg.length-(y.length-o));for(var k=s0;k<sg.length&&o<y.length;k++,o++){var w=1,a=k-s0,r=sg.length-1-k;if(a<f)w=a/f;if(r<f)w=Math.min(w,r/f);y[o]=sg[k]*w}});
+  var e=0;for(i=0;i<y.length;i++)e+=y[i]*y[i];var g=Math.min(10,0.09/Math.sqrt(e/y.length+1e-12)),pk=0;   /* at most +20 dB */
+  for(i=0;i<y.length;i++){var v=Math.abs(y[i]*g);if(v>pk)pk=v}if(pk>0.9)g*=0.9/pk;
+  var fi=Math.round(sr*0.08),fo=Math.round(sr*0.05);for(i=0;i<y.length;i++){var w=1;if(i<fi)w=i/fi;if(y.length-1-i<fo)w=Math.min(w,(y.length-1-i)/fo);y[i]*=g*w}
   return{x:y,sr:sr};
 }
-function playHim(){var s=Ls;if(!s||!s.him)return;audio();var end=playBuf(pcmBuf(s.him.x,s.him.sr),ctx.currentTime+0.1,1);quietFor((end-ctx.currentTime)*1000);ev("him",{sec:+(s.him.x.length/s.him.sr).toFixed(2)})}
-function lessonEnd(){
-  var s=Ls;capOn=false;s.phase="done";setPill("done");stageL.target=-1;stageL.holdFrac=0;
-  var won=s.hits*2>=s.L.n.length&&s.hits>0;
+function playHim(){var s=Ls;if(!s||!s.him)return;audio();stopAll(0.1);var end=playBuf(pcmBuf(s.him.x,s.him.sr),ctx.currentTime+0.1,1);quietFor((end-ctx.currentTime)*1000);ev("him",{sec:+(s.him.x.length/s.him.sr).toFixed(2)})}
+function lessonEnd(won){
+  var s=Ls;if(!s)return;capOn=false;s.phase="done";setPill("done");stageL.target=-1;stageL.holdFrac=0;
   if(won){S.stars[s.idx]=Math.min(3,(S.stars[s.idx]||0)+1);saveS();stageL.shower(80)}
-  s.him=won?himTake():null;
+  s.him=(won||s.voicedAny)?himTake():null;
   var st=S.stars[s.idx]||0;$("dStars").innerHTML="★".repeat(st)+"<i>"+"★".repeat(3-st)+"</i>";
-  $("dHim").hidden=!s.him;$("dNote").textContent=won?(s.him?"That was him singing!":""):"He listened, and that counts too. Try again later, or hum it together first.";
+  $("dHim").hidden=!s.him;
+  $("dNote").textContent=won?(s.him?"Listen back to the singing!":""):(s.voicedAny?"Nice singing! Do it again together: you sing it first, then let him copy.":"He listened, and that counts too. Try again later, or hum it together first.");
   $("dNext").hidden=s.idx>=LESSONS.length-1;
-  s.tok.at(won?700:300,function(){$("done").hidden=false;if(s.him)s.tok.at(300,playHim)});
-  ev("end",{lesson:s.idx,won:won,hits:s.hits,n:s.L.n.length,him:!!s.him});
+  s.tok.at(won?700:300,function(){$("done").hidden=false;if(won&&s.him)s.tok.at(300,playHim)});
+  ev("end",{lesson:s.idx,won:!!won,hits:s.hits,n:s.L.n.length,him:!!s.him});
 }
 function lessonLeave(){if(Ls){killTok(Ls.tok);Ls=null}capOn=false;stopAll(0.3)}
 $("lHome").onclick=function(){show("home")};
@@ -721,28 +783,30 @@ $("dHim").onclick=playHim;$("dAgain").onclick=function(){if(Ls)lessonOpen(Ls.idx
 /* ---------- free singing ---------- */
 var freeSa=0;
 function freeFrame(r,dt,now){stageF.voice(r,dt,now);
-  if(r.voiced&&Math.abs(CORE.centsTo(r.f,saBase(),0))<=S.tol){freeSa+=dt;stageF.holdFrac=freeSa/1.5;if(freeSa>=1.5){freeSa=-1.5;stageF.shower(60);ev("freesa",{})}}
+  if(r.voiced&&Math.abs(CORE.centsTo(r.f,saBase(),0))<=S.tol){freeSa+=dt;stageF.holdFrac=freeSa/0.9;if(freeSa>=0.9){freeSa=-1.5;stageF.shower(60);ev("freesa",{})}}
   else{if(freeSa>0)freeSa=Math.max(0,freeSa-dt);else if(freeSa<0)freeSa=Math.min(0,freeSa+dt);stageF.holdFrac=0}
   stageF.target=0;stageF.draw(dt,now)}
 
 /* ---------- setup / find Sa ---------- */
 var findBuf=[],findCand=-1,setupReturn=null;
 function setupStep(n){$("setMic").hidden=n!==1;$("setSa").hidden=n!==2;$("setVoice").hidden=n!==3;[1,2,3].forEach(function(k){$("st"+k).classList.toggle("on",k===n)});
-  $("st1").parentNode.hidden=!!setupReturn;if(n===2){findBuf=[];findCand=-1;$("saUse").disabled=true;$("saLive").textContent="…";$("saLive2").textContent="Listening…"}}
+  $("st1").parentNode.hidden=!!setupReturn;if(n===2){findBuf=[];findCand=-1;$("saUse").disabled=true;$("saLive").textContent="…";$("saLive2").textContent=micState==="on"?"Listening…":"The microphone is off.";
+    $("saSkip").textContent=setupReturn?("Cancel (keep "+KEYN[S.saPc]+")"):"Skip: use D"}}
 function setupFrame(r,dt,now){
   if($("setSa").hidden)return;
-  findBuf.push({t:now,f:r.voiced?r.f:0});while(findBuf.length&&now-findBuf[0].t>1200)findBuf.shift();
+  findBuf.push({t:now,f:r.voiced?r.f:0});while(findBuf.length&&now-findBuf[0].t>1700)findBuf.shift();
   var v=findBuf.filter(function(o){return o.f}),span=findBuf.length?(now-findBuf[0].t):0,steady=0;
-  if(v.length>=8&&span>=1000&&v.length/findBuf.length>=0.75){var fs=v.map(function(o){return o.f}).sort(function(a,b){return a-b}),m=fs[fs.length>>1];
+  if(v.length>=8&&span>=1500&&v.length/findBuf.length>=0.75){var fs=v.map(function(o){return o.f}).sort(function(a,b){return a-b}),m=fs[fs.length>>1];
     var dev=v.map(function(o){return Math.abs(1200*Math.log2(o.f/m))}).sort(function(a,b){return a-b});
     if(dev[Math.floor(dev.length*0.85)]<=60){steady=1;var n=CORE.nearest(m,261.6256);findCand=n.semi;$("saLive").textContent=KEYN[n.semi];$("saLive2").textContent="Harmonium key: "+KEYH[n.semi]+" (counting from C)";$("saUse").disabled=false}}
   if(r.voiced&&!steady){var nn=CORE.nearest(r.f,261.6256);if(findCand<0){$("saLive").textContent=KEYN[nn.semi];$("saLive2").textContent="Keep holding it…"}}
-  var hold=0;for(var i=findBuf.length-1;i>=0&&findBuf[i].f;i--)hold=now-findBuf[i].t;$("saMeter").style.width=clamp(hold/1000,0,1)*100+"%";
+  var hold=0;for(var i=findBuf.length-1;i>=0&&findBuf[i].f;i--)hold=now-findBuf[i].t;$("saMeter").style.width=clamp(hold/1500,0,1)*100+"%";
 }
-$("setMicBtn").onclick=function(){$("setMicMsg").textContent="Asking…";micStart().then(function(ok){if(ok){setupStep(2)}else $("setMicMsg").innerHTML='<span class="warn">The microphone is not allowed. Tablet Settings → Apps → Tiny Tunes → Permissions → Microphone → Allow, then tap the button again.</span>'})};
+$("setMicBtn").onclick=function(){$("setMicMsg").textContent="Asking…";micStart().then(function(ok){if(ok){setupStep(2)}else $("setMicMsg").innerHTML='<span class="warn">'+(micState==="denied"?"The microphone is not allowed. Tablet Settings → Apps → Tiny Tunes → Permissions → Microphone → Allow, then tap the button again.":"The microphone is busy or not working. Close other apps that use it (calls, recorders), then tap the button again.")+'</span>'})};
+$("setMicSkip").onclick=function(){setupStep(2);$("saLive2").textContent="The microphone is off, so the app can't listen. Tap \"Skip: use D\" (you can turn the microphone on later in Grown-ups)."};
 $("saUse").onclick=function(){if(findCand<0)return;S.saPc=findCand;saveS();rcache={};TP.bufs=null;ev("sa",{pc:findCand,how:"sung"});setupNext()};
-$("saSkip").onclick=function(){S.saPc=2;saveS();rcache={};TP.bufs=null;setupNext()};
-$("saHear").onclick=function(){audio();var pc=findCand>=0?findCand:S.saPc,f=261.6256*Math.pow(2,pc/12);if(pc>6)f/=2;harmNote(f,ctx.currentTime+0.05,1.6,0.2);quietFor(1700)};
+$("saSkip").onclick=function(){if(setupReturn){setupNext();return}S.saPc=2;saveS();rcache={};TP.bufs=null;setupNext()};
+$("saHear").onclick=function(){audio();stopAll(0.1);var pc=findCand>=0?findCand:S.saPc,f=261.6256*Math.pow(2,pc/12);if(pc>6)f/=2;harmNote(f,ctx.currentTime+0.05,1.6,0.2);quietFor(1700)};
 function setupNext(){if(setupReturn){var r=setupReturn;setupReturn=null;show(r);return}setupStep(3)}
 $("setRec").onclick=function(){S.setup=true;saveS();recReturn="home";show("rec")};
 $("setDone").onclick=function(){S.setup=true;saveS();show("home")};
@@ -755,9 +819,10 @@ function drawGrown(){
     b.onclick=function(){S.saPc=i;saveS();rcache={};TP.bufs=null;ev("sa",{pc:i,how:"picked"});drawGrown();hearSa()};k.appendChild(b)});
   seg($("gTol"),[[75,"Easy"],[50,"Normal"],[30,"Strict"]],S.tol,function(v){S.tol=v;saveS();drawGrown()});
   seg($("gTp"),[[true,"On"],[false,"Off"]],S.tp,function(v){S.tp=v;saveS();drawGrown()});
+  seg($("gCap"),[[40,"Soft"],[60,"Medium"],[80,"Loud"],[100,"No limit"]],S.volCap,function(v){S.volCap=v;saveS();drawGrown()});
   $("gVol").value=S.vol;
   var rec=NOTES.filter(function(n){return VR[n.s]}).map(function(n){return n.n}),bi=NOTES.filter(function(n){return VB[n.s]}).map(function(n){return n.n});
-  $("gVoiceTxt").innerHTML=rec.length?("Recorded voice: <b>"+rec.join(" ")+"</b>"+(rec.length<8?". Lessons that need other notes use the built-in voice or harmonium.":". All notes recorded.")):
+  $("gVoiceTxt").innerHTML=rec.length?("Recorded voice: <b>"+rec.join(" ")+"</b>"+(rec.length<8?". A lesson is sung in this voice when all of its notes are recorded; record all 8 so every lesson uses it.":". All notes recorded: every lesson uses this voice.")):
     ("Built-in man's voice for <b>"+bi.join(" ")+"</b>. Other notes play on harmonium until someone records them.");
   var tot=0,done=0;LESSONS.forEach(function(_,i){tot+=3;done+=S.stars[i]||0});$("gProg").textContent=done+" of "+tot+" stars. Next lesson: "+(curLesson()+1)+".";
   $("gMicMsg").textContent=micState==="denied"?"The microphone is not allowed: tablet Settings → Apps → Tiny Tunes → Permissions → Microphone.":(micState==="on"?"":"Tap here to turn on the microphone.");
@@ -772,58 +837,73 @@ $("gReset").onclick=function(){if(confirm("Clear all stars?")){S.stars={};saveS(
 function grownFrame(r){var m=clamp((r.db+70)/50,0,1);$("gMeter").style.width=m*100+"%";if(r.voiced){var n=CORE.nearest(r.f,saBase());$("gLive").textContent=n.name.replace("komal ","k.").replace("tivra ","t.")}}
 
 /* ---------- record a voice ---------- */
-var recReturn="grown",recBusy=false;
+var recReturn="grown",recBusy=false,recTok=null;
+function recCancel(){if(recTok){recTok.dead=true;recTok=null}if(capOn==="rec")capOn=false;recBusy=false}
 function db(){return new Promise(function(res){try{var q=indexedDB.open("tinytunes3",1);q.onupgradeneeded=function(){q.result.createObjectStore("clips")};q.onsuccess=function(){res(q.result)};q.onerror=function(){res(null)}}catch(e){res(null)}})}
 function dbDo(mode,fn){return db().then(function(d){if(!d)return null;return new Promise(function(res){var tx=d.transaction("clips",mode),st=tx.objectStore("clips"),out=fn(st);tx.oncomplete=function(){res(out&&out.result!==undefined?out.result:out)};tx.onerror=function(){res(null)}})})}
 function loadVR(){return db().then(function(d){if(!d)return;return new Promise(function(res){var tx=d.transaction("clips","readonly"),q=tx.objectStore("clips").openCursor();
-  q.onsuccess=function(){var c=q.result;if(c){try{var v=c.value,x=new Float32Array(v.pcm.length);for(var i=0;i<x.length;i++)x[i]=v.pcm[i]/32768;var a=CORE.analyse(x,v.sr);if(a)VR[c.key]={x:x,sr:v.sr,an:a,f0:v.f0}}catch(e){}c.continue()}else res()};q.onerror=function(){res()}})}).then(function(){vrVer++;rcache={}})}
+  q.onsuccess=function(){var c=q.result;if(c){try{var v=c.value,x=new Float32Array(v.pcm.length);for(var i=0;i<x.length;i++)x[i]=v.pcm[i]/32768;VR[c.key]={x:x,sr:v.sr,an:null,f0:v.f0}}catch(e){}c.continue()}else res()};q.onerror=function(){res()}})}).then(function(){vrVer++;rcache={}})}
 function refHz(semi){var f=saBase();if(S.who==="low"){while(f>=196)f/=2}else{while(f>=392)f/=2;while(f<196)f*=2}return f*Math.pow(2,semi/12)}
 function drawRec(){
   seg($("rWho"),[["low","A man (low voice)"],["high","A woman or child (higher voice)"]],S.who,function(v){S.who=v;saveS();drawRec()});
-  var h="";NOTES.forEach(function(n){var st=VR[n.s]?"Recorded ✓":(VB[n.s]?"Built-in voice":(n.s===12&&(VR[0]||VB[0])?"Made from Sa":"Harmonium (not recorded)"));
+  var nr=NOTES.filter(function(n){return VR[n.s]}).length,h='<p class="small" style="margin:0 0 6px"><b>'+nr+' of 8 recorded.</b> A lesson is sung in the recorded voice when all of its notes are recorded, so record all 8 with the same voice. Until then: the built-in man\'s voice (Sa Re Ma Dha) or harmonium.</p>';
+  NOTES.forEach(function(n){var st=VR[n.s]?"Recorded ✓":(n.s===12&&VR[0]?"Recorded (made from Sa)":(VB[n.s]?"Not recorded (built-in voice for now)":(n.s===12&&VB[0]?"Not recorded (built-in Sa for now)":"Not recorded (harmonium for now)")));
     h+='<div class="recrow"><div class="nm" style="background:'+n.c+'">'+n.n+'</div><div class="stt">'+st+(VR[n.s]&&VR[n.s].f0?"<br>you sang "+noteName(VR[n.s].f0)+", tuned to "+noteName(saBase()*Math.pow(2,singerK(VR)+n.s/12)):"")+
       '</div><div class="act"><button class="btn sm" data-p="'+n.s+'"'+((VR[n.s]||VB[n.s]||(n.s===12&&(VR[0]||VB[0])))?"":" disabled")+'>&#9654;</button><button class="btn sm pri" data-r="'+n.s+'">&#9679; Record</button></div></div>'});
   $("rList").innerHTML=h;
-  $("rList").querySelectorAll("[data-p]").forEach(function(b){b.onclick=function(){var s=+b.dataset.p,set=VR[s]||(s===12&&VR[0])?VR:VB;audio();stopAll(0.1);var e=playBuf(voiceBuf(set,s,1.4),ctx.currentTime+0.05,0.95);quietFor((e-ctx.currentTime)*1000)}});
+  $("rList").querySelectorAll("[data-p]").forEach(function(b){b.onclick=function(){var s=+b.dataset.p,set=VR[s]||(s===12&&VR[0])?VR:VB;audio();stopAll(0.1);var vb=voiceBuf(set,s,1.4);if(!vb)return;var e=playBuf(vb,ctx.currentTime+0.05,0.95);quietFor((e-ctx.currentTime)*1000)}});
   $("rList").querySelectorAll("[data-r]").forEach(function(b){b.onclick=function(){recNote(+b.dataset.r)}});
 }
 function noteName(f){var m=69+12*Math.log2(f/440),r=Math.round(m);return KEYN[((r%12)+12)%12]+(Math.floor(r/12)-1)}
 function recNote(semi){
-  if(recBusy)return;recBusy=true;var msg=$("rMsg"),nm=NB(semi).n;document.querySelectorAll("#rList button").forEach(function(b){b.disabled=true});
+  if(recBusy)return;recBusy=true;var tok=recTok={dead:false},msg=$("rMsg"),nm=NB(semi).n;document.querySelectorAll("#rList button").forEach(function(b){b.disabled=true});
   micStart().then(function(ok){
+    if(tok.dead)return;
     if(!ok){msg.innerHTML='<span class="warn">The microphone is not allowed (tablet Settings → Apps → Tiny Tunes → Permissions).</span>';recBusy=false;drawRec();return}
     audio();stopAll(0.1);msg.textContent="Listen: "+nm+"…";var e=harmNote(refHz(semi),ctx.currentTime+0.05,1.2,0.2);
-    setTimeout(function(){msg.innerHTML="Now say it long: <b>"+nm+nm.slice(-1).repeat(3)+"…</b> (recording)";cap=[];capOn=true;
-      setTimeout(function(){capOn=false;var n=0;cap.forEach(function(c){n+=c.length});var x=new Float32Array(n),o=0;cap.forEach(function(c){x.set(c,o);o+=c.length});
+    setTimeout(function(){if(tok.dead)return;msg.innerHTML="Now say it long: <b>"+nm+nm.slice(-1).repeat(3)+"…</b> (recording)";cap=[];capOn="rec";
+      setTimeout(function(){if(tok.dead)return;capOn=false;msg.textContent="Tuning…";setTimeout(recDone,30)},3200);
+      function recDone(){if(tok.dead)return;recTok=null;var n=0;cap.forEach(function(c){n+=c.d.length});var x=new Float32Array(n),o=0;cap.forEach(function(c){x.set(c.d,o);o+=c.d.length});
         var a=CORE.analyse(x,capSr);
         if(!a){msg.innerHTML='<span class="warn">I didn\'t hear a long note. Try again a little louder, and hold it: '+nm+nm.slice(-1).repeat(3)+'</span>';recBusy=false;drawRec();return}
         var s0=Math.max(0,a.a-Math.round(capSr*0.2)),s1=Math.min(x.length,a.b+Math.round(capSr*0.1)),y=x.slice(s0,s1),pcm=new Int16Array(y.length);
         for(var i=0;i<y.length;i++)pcm[i]=Math.max(-32767,Math.min(32767,Math.round(y[i]*32767)));
         var a2=CORE.analyse(y,capSr);if(!a2){msg.textContent="Please try again.";recBusy=false;drawRec();return}
+        var fz=a2.track.filter(function(q){return q.f&&q.t>=a2.a&&q.t<=a2.b}).map(function(q){return 1200*Math.log2(q.f/a2.f0)}).sort(function(p,q){return p-q});
+        if(fz.length>10&&fz[Math.floor(fz.length*0.9)]-fz[Math.floor(fz.length*0.1)]>600){msg.innerHTML='<span class="warn">I heard two different notes. Please hold just one: '+nm+nm.slice(-1).repeat(3)+'</span>';recBusy=false;drawRec();return}
         VR[semi]={x:y,sr:capSr,an:a2,f0:a2.f0};vrVer++;rcache={};
-        dbDo("readwrite",function(st){return st.put({sr:capSr,pcm:pcm,f0:a2.f0,at:Date.now()},semi)});
+        dbDo("readwrite",function(st){return st.put({sr:capSr,pcm:pcm,f0:a2.f0,at:Date.now()},semi)}).then(function(r){if(r==null)msg.innerHTML='<span class="warn">This recording could not be saved on the tablet (storage may be full). It works until the app is closed.</span>'});
         ev("recorded",{semi:semi,f0:+a2.f0.toFixed(1)});
         msg.textContent="Done. This is how "+nm+" will sound:";recBusy=false;drawRec();
-        var pe=playBuf(voiceBuf(VR,semi,1.4),ctx.currentTime+0.15,0.95);quietFor((pe-ctx.currentTime)*1000);
-      },2600);
+        var vb=voiceBuf(VR,semi,1.4);if(vb){var pe=playBuf(vb,ctx.currentTime+0.15,0.95);quietFor((pe-ctx.currentTime)*1000)}
+      }
     },(e-ctx.currentTime)*1000+150);
   });
 }
-$("rBack").onclick=function(){show(recReturn||"grown")};
+$("rBack").onclick=function(){recCancel();show(recReturn||"grown")};
 $("rClear").onclick=function(){if(!confirm("Delete the recorded voice?"))return;dbDo("readwrite",function(st){st.clear()});VR={};vrVer++;rcache={};drawRec();$("rMsg").textContent="Deleted. The built-in voice is used again."};
 
 /* ---------- leaving and coming back to the app ---------- */
 document.addEventListener("visibilitychange",function(){
-  if(document.hidden){stopAll(0.1);if(Ls){killTok(Ls.tok);Ls.tok=newTok();Ls.phase="paused";capOn=false}micStop()}
-  else{if(screen==="lesson"||screen==="free"||screen==="setup"||screen==="grown"){if(S.micOK)micStart()}if(screen==="lesson"&&Ls)Ls.tok.at(400,lessonListen)}
+  if(document.hidden){stopAll(0.1);recCancel();if(Ls&&Ls.phase!=="done"){killTok(Ls.tok);Ls.tok=newTok();Ls.phase="paused";capOn=false}micStop()}
+  else{if(screen==="lesson"||screen==="free"||screen==="setup"||screen==="grown"){if(S.micOK)micStart()}if(screen==="lesson"&&Ls&&Ls.phase==="paused")Ls.tok.at(400,lessonListen)}
 });
 
 /* ---------- start ---------- */
 if("serviceWorker" in navigator){try{navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister()})}).catch(noop)}catch(e){}}
-initBuiltin();
+initBuiltin();nat("info").then(function(i){btOut=!!(i&&i.bluetooth)}).catch(noop);
 if(S.setup){show("home")}else{show("setup");setupStep(1)}
-loadVR().then(function(){if(screen==="home")drawHome()});
-window.TT={S:S,events:events,CORE:CORE,saBase:saBase,LESSONS:LESSONS,VB:VB,VR:function(){return VR},show:show,lessonOpen:lessonOpen,
+/* prepare the voice clips quietly in the background, one at a time, so a lesson starts without a pause */
+function prepIdle(){var list=[];Object.keys(VB).forEach(function(k){list.push(VB[k])});Object.keys(VR).forEach(function(k){list.push(VR[k])});
+  var i=0;(function next(){while(i<list.length&&list[i].an)i++;if(i>=list.length)return;try{prep(list[i])}catch(e){}i++;setTimeout(next,120)})()}
+loadVR().then(function(){if(screen==="home")drawHome();setTimeout(prepIdle,200)});
+function back(){
+  if(screen==="lesson"||screen==="free"||screen==="grown"){show("home");return true}
+  if(screen==="rec"){recCancel();show(recReturn||"grown");return true}
+  if(screen==="setup"&&setupReturn){var r=setupReturn;setupReturn=null;show(r);return true}
+  return false;   /* home (or first set-up): Back leaves the app as usual */
+}
+window.TT={back:back,S:S,events:events,CORE:CORE,saBase:saBase,LESSONS:LESSONS,VB:VB,VR:function(){return VR},show:show,lessonOpen:lessonOpen,
   state:function(){return{screen:screen,mic:micState,voiced:cur.voiced,f:cur.voiced?+cur.f.toFixed(1):0,db:+cur.db.toFixed(1),note:cur.voiced?CORE.nearest(cur.f,saBase()).name:"",
     lesson:Ls?{idx:Ls.idx,phase:Ls.phase,i:Ls.i,hits:Ls.hits,miss:Ls.miss,hold:+Ls.hold.toFixed(2),target:Ls.phase==="turn"?Ls.L.n[Ls.i]:-1,him:!!Ls.him}:null,
     stars:S.stars,saPc:S.saPc,findCand:findCand,tp:TP.on,stageC:Math.round(stageL.c)}}};

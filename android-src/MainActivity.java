@@ -4,6 +4,7 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.WindowManager;
+import androidx.activity.OnBackPressedCallback;
 import com.getcapacitor.BridgeActivity;
 
 public class MainActivity extends BridgeActivity {
@@ -17,6 +18,26 @@ public class MainActivity extends BridgeActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         // Volume keys in this app always mean media volume (not ringer), even when nothing is playing.
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
+        // Back button / edge swipe: the web app goes back one screen (a stray swipe by the child must not
+        // close music time). Only on the app's home screen does Back leave the app as usual.
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (bridge == null || bridge.getWebView() == null) {
+                    leave();
+                    return;
+                }
+                bridge.getWebView().evaluateJavascript("(window.TT&&TT.back)?TT.back():false", value -> {
+                    if (!"true".equals(value)) leave();
+                });
+            }
+
+            private void leave() {
+                setEnabled(false);
+                getOnBackPressedDispatcher().onBackPressed();
+                setEnabled(true);
+            }
+        });
     }
 
     @Override
